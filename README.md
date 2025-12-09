@@ -187,6 +187,23 @@ npm run typecheck
 
 MIT License - see LICENSE file for details
 
+## Credits and Acknowledgments
+
+### OpenCode Team
+
+This project builds upon the OpenCode framework, an AI coding agent built for the terminal. Special thanks to the OpenCode team for their open source license agreement that enabled this integration.
+
+### Integration by Zenthrose
+
+The integration of OpenCode, ncnn, Vulkan, and the Node.js binding was implemented by Zenthrose, combining these technologies to create a seamless GGUF loading experience within the OpenCode development environment.
+
+### ncnn Framework
+
+This project would not be possible without the excellent ncnn framework developed by the Tencent team. ncnn provides the high-performance neural network inference capabilities that power the GPU-accelerated model loading.
+
+- **ncnn Repository**: https://github.com/Tencent/ncnn
+- **License**: Apache 2.0
+
 ## Future Plans
 
 - **Simplified Build Process**: Automated scripts and Docker support
@@ -204,4 +221,4 @@ MIT License - see LICENSE file for details
 
 ---
 
-**Built with ❤️ by the OpenCode team**
+**Built with ❤️ by the OpenCode team and integrated by Zenthrose**
