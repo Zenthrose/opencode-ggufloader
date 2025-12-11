@@ -1,0 +1,21 @@
+{
+  "name": "@opencode-ai/ncnn-binding",
+  "version": "0.1.0",
+  "description": "Node.js N-API binding for ncnn-vulkan LLM inference",
+  "main": "index.js",
+  "scripts": {
+    "build": "cmake-js compile -G Ninja",
+    "clean": "cmake-js clean",
+    "install": "npm run build"
+  },
+  "dependencies": {
+    "node-addon-api": "^6.0.0"
+  },
+  "devDependencies": {
+    "cmake-js": "^7.4.0",
+    "node-gyp": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

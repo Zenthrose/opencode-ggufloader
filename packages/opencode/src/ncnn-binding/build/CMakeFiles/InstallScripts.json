@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

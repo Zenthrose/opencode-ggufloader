@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/opencode-1.0.134/ncnn-vulkan/build/cmake_install.cmake",
+		"C:/opencode-1.0.134/ncnn-vulkan/build/src/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

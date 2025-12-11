@@ -1,0 +1,405 @@
+c:\opencode-1.0.134>set PATH=C:\msys64\mingw64\bin;%PATH% && set CC=C:\msys64\mingw64\bin\gcc.exe && set CXX=C:\msys64\mingw64\bin\g++.exe && cd C:\opencode-1.0.134\ncnn-vulkan && rmdir /s /q build 2>nul && mkdir build && cd build && cmake .. -G Ninja -DCMAKE_CXX_COMPILER=C:\msys64\mingw64\bin\g++.exe -DCMAKE_C_COMPILER=C:\msys64\mingw64\bin\gcc.exe -DNCNN_VULKAN=ON -DNCNN_SYSTEM_GLSLANG=ON -Dglslang_DIR=C:/VulkanSDK/1.3.296.0/Lib/cmake/glslang -DGLSLANG_TARGET_DIR=C:/VulkanSDK/1.3.296.0/Lib/cmake/glslang -DCMAKE_BUILD_TYPE=RelWithDebInfo -DNCNN_BUILD_TOOLS=OFF -DNCNN_BUILD_EXAMPLES=OFF -DNCNN_BUILD_TESTS=OFF -DNCNN_BUILD_BENCHMARK=OFF -DNCNN_SIMPLEVK=ON -DCMAKE_CXX_FLAGS="-IC:/VulkanSDK/1.3.296.0/Include" && cmake --build . --config RelWithDebInfo -j 2 && cd ..\..\packages\opencode\src\ncnn-binding && rmdir /s /q build 2>nul && set C_INCLUDE_PATH=C:\opencode-1.0.134\ncnn-vulkan\src && set LIBRARY_PATH=C:\opencode-1.0.134\ncnn-vulkan\build\src && set CC=C:\msys64\mingw64\bin\gcc.exe && set CXX=C:\msys64\mingw64\bin\g++.exe && npm run build && cd ..\..\.. && npm run build
+-- CMAKE_INSTALL_PREFIX = C:/opencode-1.0.134/ncnn-vulkan/build/install
+-- NCNN_VERSION_STRING = 1.0.20251211
+-- The C compiler identification is GNU 15.2.0
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/msys64/mingw64/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test NCNN_COMPILER_SUPPORT_GNU_INLINE_ASM
+-- Performing Test NCNN_COMPILER_SUPPORT_GNU_INLINE_ASM - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_RECIP_NONE
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_RECIP_NONE - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_FMA
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_FMA - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_XOP
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_XOP - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_F16C
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_F16C - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX2
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX2 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT8
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT8 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT16
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT16 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_NE_CONVERT
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_NE_CONVERT - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_VNNI
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_VNNI - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_BF16
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_BF16 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_FP16
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_FP16 - Success
+-- Target arch: x86 64bit
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found glslang: C:/VulkanSDK/1.3.296.0/lib/glslangd.lib (found version "15.0.0")
+-- Found SPIRV: C:/VulkanSDK/1.3.296.0/lib/SPIRVd.lib (found version "15.0.0")
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR - Success
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Configuring done (50.7s)
+-- Generating done (0.5s)
+-- Build files have been written to: C:/opencode-1.0.134/ncnn-vulkan/build
+[571/998] Building CXX object src/CMakeFiles/ncnn.dir/cpu.cpp.obj
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'int get_physical_cpucount()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:992:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPI' {aka 'int (*)(_SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, long unsigned int*)'} [-Wcast-function-type]
+  992 |     LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'int get_cpu_level2_cachesize()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1235:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPI' {aka 'int (*)(_SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, long unsigned int*)'} [-Wcast-function-type]
+ 1235 |     LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'int get_cpu_level3_cachesize()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1305:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPI' {aka 'int (*)(_SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, long unsigned int*)'} [-Wcast-function-type]
+ 1305 |     LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'ncnn::CpuSet get_smt_cpu_mask()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1356:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPI' {aka 'int (*)(_SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, long unsigned int*)'} [-Wcast-function-type]
+ 1356 |     LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'std::vector<int> get_max_freq_mhz()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1408:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_CNPI' {aka 'long int (*)(POWER_INFORMATION_LEVEL, void*, long unsigned int, void*, long unsigned int)'} [-Wcast-function-type]
+ 1408 |     LPFN_CNPI cnpi = (LPFN_CNPI)GetProcAddress(powrprof, "CallNtPowerInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from C:/opencode-1.0.134/ncnn-vulkan/src/cpu.h:17,
+                 from C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:4:
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'int set_sched_affinity(const ncnn::CpuSet&)':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1438:19: warning: format '%d' expects argument of type 'int', but argument 3 has type 'DWORD' {aka 'long unsigned int'} [-Wformat=]
+ 1438 |         NCNN_LOGE("SetThreadAffinityMask failed %d", GetLastError());
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~
+      |                                                                  |
+      |                                                                  DWORD {aka long unsigned int}
+C:/opencode-1.0.134/ncnn-vulkan/build/src/platform.h:348:23: note: in definition of macro 'NCNN_LOGE'
+  348 |     fprintf(stderr, ##__VA_ARGS__); fprintf(stderr, "\n"); } while(0)
+      |                       ^~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1438:50: note: format string is defined here
+ 1438 |         NCNN_LOGE("SetThreadAffinityMask failed %d", GetLastError());
+      |                                                 ~^
+      |                                                  |
+      |                                                  int
+      |                                                 %ld
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'void initialize_cpu_thread_affinity_mask(ncnn::CpuSet&, ncnn::CpuSet&, ncnn::CpuSet&)':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1631:24: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPIE' {aka 'int (*)(LOGICAL_PROCESSOR_RELATIONSHIP, _SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*, long unsigned int*)'} [-Wcast-function-type]
+ 1631 |     LPFN_GLPIE glpie = (LPFN_GLPIE)GetProcAddress(kernel32, "GetLogicalProcessorInformationEx");
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1693:35: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<std::pair<long unsigned int, bool> >::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+ 1693 |                 for (int j = 0; j < processorCoreType.size(); j++)
+      |                                 ~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1696:33: warning: comparison of integer expressions of different signedness: 'long unsigned int' and 'int' [-Wsign-compare]
+ 1696 |                     if (p.first == i)
+      |                         ~~~~~~~~^~~~
+[575/998] Building CXX object src/CMakeFiles/ncnn.dir/layer.cpp.obj
+In file included from C:/opencode-1.0.134/ncnn-vulkan/build/src/layer_declaration.h:559,
+                 from C:/opencode-1.0.134/ncnn-vulkan/src/layer.cpp:10:
+C:/opencode-1.0.134/ncnn-vulkan/src/layer/noop.h:16:17: warning: 'virtual int ncnn::Noop::forward_inplace(std::vector<ncnn::Mat>&, const ncnn::Option&) const' was hidden [-Woverloaded-virtual=]
+   16 |     virtual int forward_inplace(std::vector<Mat>& bottom_top_blobs, const Option& opt) const;
+      |                 ^~~~~~~~~~~~~~~
+In file included from C:/opencode-1.0.134/ncnn-vulkan/build/src/layer_declaration.h:561:
+C:/opencode-1.0.134/ncnn-vulkan/src/layer/vulkan/noop_vulkan.h:17:17: note:   by 'virtual int ncnn::Noop_vulkan::forward_inplace(std::vector<ncnn::VkMat>&, ncnn::VkCompute&, const ncnn::Option&) const'
+   17 |     virtual int forward_inplace(std::vector<VkMat>& bottom_top_blobs, VkCompute& cmd, const Option& opt) const;
+      |                 ^~~~~~~~~~~~~~~
+[578/998] Building CXX object src/CMakeFiles/ncnn.dir/gpu.cpp.obj
+C:/opencode-1.0.134/ncnn-vulkan/src/gpu.cpp: In member function 'void ncnn::GpuInfoPrivate::query_extension_properties()':
+C:/opencode-1.0.134/ncnn-vulkan/src/gpu.cpp:1289:70: warning: unused variable 'cmfdp' [-Wunused-variable]
+ 1289 |             const VkCooperativeMatrixFlexibleDimensionsPropertiesNV& cmfdp = queryCooperativeMatrixFlexibleDimensionsSubPropertiesNV[j];
+      |                                                                      ^~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/gpu.cpp:1320:52: warning: unused variable 'cvp' [-Wunused-variable]
+ 1320 |             const VkCooperativeVectorPropertiesNV& cvp = queryCooperativeVectorSubPropertiesNV[j];
+      |                                                    ^~~
+C:/opencode-1.0.134/ncnn-vulkan/src/gpu.cpp: In function 'int ncnn::compile_spirv_module(const char*, int, const Option&, std::vector<unsigned int>&)':
+C:/opencode-1.0.134/ncnn-vulkan/src/gpu.cpp:5413:40: warning: format '%lu' expects argument of type 'long unsigned int', but argument 3 has type 'long long unsigned int' [-Wformat=]
+ 5413 |                     sprintf(defstr, "%luull", def.u64);
+      |                                      ~~^      ~~~~~~~
+      |                                        |          |
+      |                                        |          long long unsigned int
+      |                                        long unsigned int
+      |                                      %llu
+C:/opencode-1.0.134/ncnn-vulkan/src/gpu.cpp:5457:40: warning: format '%lu' expects argument of type 'long unsigned int', but argument 3 has type 'long long unsigned int' [-Wformat=]
+ 5457 |                     sprintf(defstr, "%luull", def.u64);
+      |                                      ~~^      ~~~~~~~
+      |                                        |          |
+      |                                        |          long long unsigned int
+      |                                        long unsigned int
+      |                                      %llu
+[593/998] Building CXX object src/CMakeFiles/ncnn.dir/simplevk.cpp.obj
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp: In function 'std::string ncnn::search_file(const std::string&, const std::string&)':
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp:239:23: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<std::__cxx11::basic_string<char> >::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+  239 |     for (int i = 0; i < subdirs.size(); ++i)
+      |                     ~~^~~~~~~~~~~~~~~~
+In file included from C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp:4:
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp: In function 'int ncnn::load_vulkan_windows(const char*)':
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp:256:19: warning: format '%d' expects argument of type 'int', but argument 4 has type 'DWORD' {aka 'long unsigned int'} [-Wformat=]
+  256 |         NCNN_LOGE("LoadLibraryA %s failed %d", libpath, GetLastError());
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~           ~~~~~~~~~~~~~~
+      |                                                                     |
+      |                                                                     DWORD {aka long unsigned int}
+C:/opencode-1.0.134/ncnn-vulkan/build/src/platform.h:348:23: note: in definition of macro 'NCNN_LOGE'
+  348 |     fprintf(stderr, ##__VA_ARGS__); fprintf(stderr, "\n"); } while(0)
+      |                       ^~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp:256:44: note: format string is defined here
+  256 |         NCNN_LOGE("LoadLibraryA %s failed %d", libpath, GetLastError());
+      |                                           ~^
+      |                                            |
+      |                                            int
+      |                                           %ld
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp:262:27: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'PFN_vkGetInstanceProcAddr' {aka 'void (* (*)(VkInstance_T*, const char*))()'} [-Wcast-function-type]
+  262 |     GetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)GetProcAddress(libvulkan, "vk_icdGetInstanceProcAddr");
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp:267:91: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'PFN_icdNegotiateLoaderICDInterfaceVersion' {aka 'VkResult (*)(unsigned int*)'} [-Wcast-function-type]
+  267 |         PFN_icdNegotiateLoaderICDInterfaceVersion icdNegotiateLoaderICDInterfaceVersion = (PFN_icdNegotiateLoaderICDInterfaceVersion)GetProcAddress(libvulkan, "vk_icdNegotiateLoaderICDInterfaceVersion");
+      |                                                                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp:282:31: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'PFN_vkGetInstanceProcAddr' {aka 'void (* (*)(VkInstance_T*, const char*))()'} [-Wcast-function-type]
+  282 |         GetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)GetProcAddress(libvulkan, "vkGetInstanceProcAddr");
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp:285:23: warning: format '%d' expects argument of type 'int', but argument 3 has type 'DWORD' {aka 'long unsigned int'} [-Wformat=]
+  285 |             NCNN_LOGE("GetProcAddress failed %d", GetLastError());
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~
+      |                                                               |
+      |                                                               DWORD {aka long unsigned int}
+C:/opencode-1.0.134/ncnn-vulkan/build/src/platform.h:348:23: note: in definition of macro 'NCNN_LOGE'
+  348 |     fprintf(stderr, ##__VA_ARGS__); fprintf(stderr, "\n"); } while(0)
+      |                       ^~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/simplevk.cpp:285:47: note: format string is defined here
+  285 |             NCNN_LOGE("GetProcAddress failed %d", GetLastError());
+      |                                              ~^
+      |                                               |
+      |                                               int
+      |                                              %ld
+[595/998] Building CXX object src/CMakeFiles/ncnn.dir/llm_engine.cpp.obj
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp: In member function 'int ncnn::InnerProduct::forward(const ncnn::Mat&, ncnn::Mat&, const ncnn::Option&) const':
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:15:70: warning: unused parameter 'opt' [-Wunused-parameter]
+   15 |     int forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const {
+      |                                                        ~~~~~~~~~~~~~~^~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp: In member function 'int ncnn::LayerNorm::forward(const ncnn::Mat&, ncnn::Mat&, const ncnn::Option&) const':
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:40:70: warning: unused parameter 'opt' [-Wunused-parameter]
+   40 |     int forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const {
+      |                                                        ~~~~~~~~~~~~~~^~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp: In member function 'ncnn::Mat ncnn::LLMEngine::forward_layer(int, const ncnn::Mat&, int)':
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:275:23: warning: comparison of integer expressions of different signedness: 'int' and 'size_t' {aka 'long long unsigned int'} [-Wsign-compare]
+  275 |     for (int i = 0; i < x.total(); i++) {
+      |                     ~~^~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:302:23: warning: comparison of integer expressions of different signedness: 'int' and 'size_t' {aka 'long long unsigned int'} [-Wsign-compare]
+  302 |     for (int i = 0; i < gate_out.total(); i++) {
+      |                     ~~^~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:313:23: warning: comparison of integer expressions of different signedness: 'int' and 'size_t' {aka 'long long unsigned int'} [-Wsign-compare]
+  313 |     for (int i = 0; i < res.total(); i++) {
+      |                     ~~^~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:253:63: warning: unused parameter 'start_pos' [-Wunused-parameter]
+  253 | Mat LLMEngine::forward_layer(int layer_idx, const Mat& x, int start_pos)
+      |                                                           ~~~~^~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp: In member function 'int ncnn::LLMEngine::sample_token(const float*, const ncnn::GenerationConfig&, const std::vector<int>&)':
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:320:106: warning: unused parameter 'history' [-Wunused-parameter]
+  320 | int LLMEngine::sample_token(const float* logits, const GenerationConfig& config, const std::vector<int>& history)
+      |                                                                                  ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+[887/998] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/noop_vulkan.cpp.obj
+In file included from C:/opencode-1.0.134/ncnn-vulkan/src/layer/vulkan/noop_vulkan.h:7,
+                 from C:/opencode-1.0.134/ncnn-vulkan/src/layer/vulkan/noop_vulkan.cpp:4:
+C:/opencode-1.0.134/ncnn-vulkan/src/layer/noop.h:16:17: warning: 'virtual int ncnn::Noop::forward_inplace(std::vector<ncnn::Mat>&, const ncnn::Option&) const' was hidden [-Woverloaded-virtual=]
+   16 |     virtual int forward_inplace(std::vector<Mat>& bottom_top_blobs, const Option& opt) const;
+      |                 ^~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/layer/vulkan/noop_vulkan.h:17:17: note:   by 'virtual int ncnn::Noop_vulkan::forward_inplace(std::vector<ncnn::VkMat>&, ncnn::VkCompute&, const ncnn::Option&) const'
+   17 |     virtual int forward_inplace(std::vector<VkMat>& bottom_top_blobs, VkCompute& cmd, const Option& opt) const;
+      |                 ^~~~~~~~~~~~~~~
+[906/998] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/gemm_vulkan.cpp.obj
+C:/opencode-1.0.134/ncnn-vulkan/src/layer/vulkan/gemm_vulkan.cpp: In member function 'virtual int ncnn::Gemm_vulkan::forward(const std::vector<ncnn::VkMat>&, std::vector<ncnn::VkMat>&, ncnn::VkCompute&, const ncnn::Option&) const':
+C:/opencode-1.0.134/ncnn-vulkan/src/layer/vulkan/gemm_vulkan.cpp:289:9: warning: unused variable 'elempack' [-Wunused-variable]
+  289 |     int elempack = A.elempack;
+      |         ^~~~~~~~
+[998/998] Linking CXX static library src\libncnn.a
+
+> @opencode-ai/ncnn-binding@0.1.0 build
+> cmake-js compile -G Ninja
+
+info TOOL Using Ninja generator, as specified from commandline.
+info CMD CONFIGURE
+info RUN [
+info RUN   'cmake',
+info RUN   'C:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding',
+info RUN   '--no-warn-unused-cli',
+info RUN   '-G',
+info RUN   'Ninja',
+info RUN   '-DCMAKE_JS_VERSION=7.4.0',
+info RUN   '-DCMAKE_BUILD_TYPE=Release',
+info RUN   '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=C:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build',
+info RUN   '-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded$<$<CONFIG:Debug>:Debug>',
+info RUN   '-DCMAKE_JS_INC=C:\\Users\\Zenthrose\\.cmake-js\\node-x64\\v25.2.1\\include\\node',
+info RUN   '-DCMAKE_JS_SRC=C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/cmake-js/lib/cpp/win_delay_load_hook.cc',
+info RUN   '-DNODE_RUNTIME=node',
+info RUN   '-DNODE_RUNTIMEVERSION=25.2.1',
+info RUN   '-DNODE_ARCH=x64',
+info RUN   '-DCMAKE_JS_LIB=C:\\Users\\Zenthrose\\.cmake-js\\node-x64\\v25.2.1\\win-x64\\node.lib',
+info RUN   '-DCMAKE_SHARED_LINKER_FLAGS=/DELAYLOAD:NODE.EXE'
+info RUN ]
+Not searching for unused variables given on the command line.
+-- The C compiler identification is GNU 15.2.0
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/msys64/mingw64/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Configuring done (8.8s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build
+info CMD BUILD
+info RUN [
+info RUN   'cmake',
+info RUN   '--build',
+info RUN   'C:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build',
+info RUN   '--config',
+info RUN   'Release'
+info RUN ]
+[1/4] Building CXX object CMakeFiles/ncnn_binding.dir/src/binding.cc.obj
+FAILED: [code=1] CMakeFiles/ncnn_binding.dir/src/binding.cc.obj
+C:\msys64\mingw64\bin\g++.exe -DNAPI_DISABLE_CPP_EXCEPTIONS -DNOMINMAX -Dncnn_binding_EXPORTS -IC:/Users/Zenthrose/.cmake-js/node-x64/v25.2.1/include/node -IC:/opencode-1.0.134/packages/opencode/src/ncnn-binding///"C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/node-addon-api/" -IC:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/node-addon-api -IC:/opencode-1.0.134/ncnn-vulkan/src -IC:/opencode-1.0.134/ncnn-vulkan/build/src -IC:/VulkanSDK/1.3.296.0/Include -IC:/VulkanSDK/1.3.296.0/Include/glslang -IC:/VulkanSDK/1.3.296.0/Include/SPIRV -O3 -DNDEBUG -fopenmp -MD -MT CMakeFiles/ncnn_binding.dir/src/binding.cc.obj -MF CMakeFiles\ncnn_binding.dir\src\binding.cc.obj.d -o CMakeFiles/ncnn_binding.dir/src/binding.cc.obj -c C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:12:29: error: typedef 'TShader_constructor_t' is initialized (use 'decltype' instead)
+   12 | typedef glslang::TShader* (*TShader_constructor_t)(glslang::EShLanguage);
+      |                             ^~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:12:61: error: 'EShLanguage' is not a member of 'glslang'; did you mean 'EShLanguage'?
+   12 | typedef glslang::TShader* (*TShader_constructor_t)(glslang::EShLanguage);
+      |                                                             ^~~~~~~~~~~
+In file included from C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:4:
+C:/VulkanSDK/1.3.296.0/Include/glslang/Public/ShaderLang.h:101:3: note: 'EShLanguage' declared here
+  101 | } EShLanguage;         // would be better as stage, but this is ancient now
+      |   ^~~~~~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:66: error: 'TBuiltInResource' in namespace 'glslang' does not name a type
+   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
+      |                                                                  ^~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:90: error: 'glslang::EProfile' has not been declared
+   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
+      |                                                                                          ^~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:121: error: 'glslang::EShMessages' has not been declared
+   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
+      |                                                                                                                         ^~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:25:8: error: 'TShader_constructor_t' does not name a type; did you mean 'TShader_destructor_t'?
+   25 | static TShader_constructor_t glslang_TShader_constructor = nullptr;
+      |        ^~~~~~~~~~~~~~~~~~~~~
+      |        TShader_destructor_t
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc: In function 'bool loadGlslangLibraries()':
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:47:5: error: 'glslang_TShader_constructor' was not declared in this scope; did you mean 'glslang_TShader_destructor'?
+   47 |     glslang_TShader_constructor = (TShader_constructor_t)GetProcAddress(glslang_dll, "TShader_constructor");
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     glslang_TShader_destructor
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:47:36: error: 'TShader_constructor_t' was not declared in this scope; did you mean 'TShader_destructor_t'?
+   47 |     glslang_TShader_constructor = (TShader_constructor_t)GetProcAddress(glslang_dll, "TShader_constructor");
+      |                                    ^~~~~~~~~~~~~~~~~~~~~
+      |                                    TShader_destructor_t
+[3/4] Building CXX object CMakeFiles/ncnn_binding.dir/src/hardware_wrap.cc.obj
+ninja: build stopped: subcommand failed.
+info REP Build has been failed, trying to do a full rebuild.
+info CMD CLEAN
+info RUN [
+info RUN   'cmake',
+info RUN   '-E',
+info RUN   'remove_directory',
+info RUN   'C:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build'
+info RUN ]
+info CMD CONFIGURE
+info RUN [
+info RUN   'cmake',
+info RUN   'C:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding',
+info RUN   '--no-warn-unused-cli',
+info RUN   '-G',
+info RUN   'Ninja',
+info RUN   '-DCMAKE_JS_VERSION=7.4.0',
+info RUN   '-DCMAKE_BUILD_TYPE=Release',
+info RUN   '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=C:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build',
+info RUN   '-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded$<$<CONFIG:Debug>:Debug>',
+info RUN   '-DCMAKE_JS_INC=C:\\Users\\Zenthrose\\.cmake-js\\node-x64\\v25.2.1\\include\\node',
+info RUN   '-DCMAKE_JS_SRC=C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/cmake-js/lib/cpp/win_delay_load_hook.cc',
+info RUN   '-DNODE_RUNTIME=node',
+info RUN   '-DNODE_RUNTIMEVERSION=25.2.1',
+info RUN   '-DNODE_ARCH=x64',
+info RUN   '-DCMAKE_JS_LIB=C:\\Users\\Zenthrose\\.cmake-js\\node-x64\\v25.2.1\\win-x64\\node.lib',
+info RUN   '-DCMAKE_SHARED_LINKER_FLAGS=/DELAYLOAD:NODE.EXE'
+info RUN ]
+Not searching for unused variables given on the command line.
+-- The C compiler identification is GNU 15.2.0
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/msys64/mingw64/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Configuring done (7.6s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build
+info CMD BUILD
+info RUN [
+info RUN   'cmake',
+info RUN   '--build',
+info RUN   'C:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build',
+info RUN   '--config',
+info RUN   'Release'
+info RUN ]
+[1/4] Building CXX object CMakeFiles/ncnn_binding.dir/src/binding.cc.obj
+FAILED: [code=1] CMakeFiles/ncnn_binding.dir/src/binding.cc.obj
+C:\msys64\mingw64\bin\g++.exe -DNAPI_DISABLE_CPP_EXCEPTIONS -DNOMINMAX -Dncnn_binding_EXPORTS -IC:/Users/Zenthrose/.cmake-js/node-x64/v25.2.1/include/node -IC:/opencode-1.0.134/packages/opencode/src/ncnn-binding///"C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/node-addon-api/" -IC:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/node-addon-api -IC:/opencode-1.0.134/ncnn-vulkan/src -IC:/opencode-1.0.134/ncnn-vulkan/build/src -IC:/VulkanSDK/1.3.296.0/Include -IC:/VulkanSDK/1.3.296.0/Include/glslang -IC:/VulkanSDK/1.3.296.0/Include/SPIRV -O3 -DNDEBUG -fopenmp -MD -MT CMakeFiles/ncnn_binding.dir/src/binding.cc.obj -MF CMakeFiles\ncnn_binding.dir\src\binding.cc.obj.d -o CMakeFiles/ncnn_binding.dir/src/binding.cc.obj -c C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:12:29: error: typedef 'TShader_constructor_t' is initialized (use 'decltype' instead)
+   12 | typedef glslang::TShader* (*TShader_constructor_t)(glslang::EShLanguage);
+      |                             ^~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:12:61: error: 'EShLanguage' is not a member of 'glslang'; did you mean 'EShLanguage'?
+   12 | typedef glslang::TShader* (*TShader_constructor_t)(glslang::EShLanguage);
+      |                                                             ^~~~~~~~~~~
+In file included from C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:4:
+C:/VulkanSDK/1.3.296.0/Include/glslang/Public/ShaderLang.h:101:3: note: 'EShLanguage' declared here
+  101 | } EShLanguage;         // would be better as stage, but this is ancient now
+      |   ^~~~~~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:66: error: 'TBuiltInResource' in namespace 'glslang' does not name a type
+   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
+      |                                                                  ^~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:90: error: 'glslang::EProfile' has not been declared
+   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
+      |                                                                                          ^~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:121: error: 'glslang::EShMessages' has not been declared
+   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
+      |                                                                                                                         ^~~~~~~
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:25:8: error: 'TShader_constructor_t' does not name a type; did you mean 'TShader_destructor_t'?
+   25 | static TShader_constructor_t glslang_TShader_constructor = nullptr;
+      |        ^~~~~~~~~~~~~~~~~~~~~
+      |        TShader_destructor_t
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc: In function 'bool loadGlslangLibraries()':
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:47:5: error: 'glslang_TShader_constructor' was not declared in this scope; did you mean 'glslang_TShader_destructor'?
+   47 |     glslang_TShader_constructor = (TShader_constructor_t)GetProcAddress(glslang_dll, "TShader_constructor");
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     glslang_TShader_destructor
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:47:36: error: 'TShader_constructor_t' was not declared in this scope; did you mean 'TShader_destructor_t'?
+   47 |     glslang_TShader_constructor = (TShader_constructor_t)GetProcAddress(glslang_dll, "TShader_constructor");
+      |                                    ^~~~~~~~~~~~~~~~~~~~~
+      |                                    TShader_destructor_t
+[3/4] Building CXX object CMakeFiles/ncnn_binding.dir/src/hardware_wrap.cc.obj
+ninja: build stopped: subcommand failed.
+ERR! OMG Process terminated: 1

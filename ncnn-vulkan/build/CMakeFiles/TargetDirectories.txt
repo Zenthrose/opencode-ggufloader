@@ -1,0 +1,14 @@
+C:/opencode-1.0.134/ncnn-vulkan/build/CMakeFiles/edit_cache.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/CMakeFiles/rebuild_cache.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/CMakeFiles/list_install_components.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/CMakeFiles/install.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/CMakeFiles/install/local.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/CMakeFiles/install/strip.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/src/CMakeFiles/ncnn-generate-spirv.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/src/CMakeFiles/ncnn.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/src/CMakeFiles/edit_cache.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/src/CMakeFiles/rebuild_cache.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/src/CMakeFiles/list_install_components.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/src/CMakeFiles/install.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/src/CMakeFiles/install/local.dir
+C:/opencode-1.0.134/ncnn-vulkan/build/src/CMakeFiles/install/strip.dir

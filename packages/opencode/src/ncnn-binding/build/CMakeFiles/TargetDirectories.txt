@@ -1,0 +1,3 @@
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build/CMakeFiles/ncnn_binding.dir
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build/CMakeFiles/edit_cache.dir
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build/CMakeFiles/rebuild_cache.dir

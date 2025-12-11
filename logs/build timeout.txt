@@ -1,0 +1,497 @@
+$ set PATH=C:\msys64\mingw64\bin;%PATH% && cd ncnn-vulkan && rmdir /s /q build 2>nul && C:\msys64\mingw64\bin\cmake.exe -B build -G Ninja -DCMAKE_CXX_COMPILER=C:\msys64\mingw64\bin\g++.exe -DCMAKE_C_COMPILER=C:\msys64\mingw64\bin\gcc.exe -DNCNN_VULKAN=OFF -DNCNN_BUILD_BENCHMARK=OFF -DNCNN_BUILD_TESTS=OFF && C:\msys64\mingw64\bin\cmake.exe --build build --config Release -j 2 && C:\msys64\mingw64\bin\cmake.exe --install build --prefix install
+-- CMAKE_INSTALL_PREFIX = C:/opencode-1.0.134/ncnn-vulkan/build/install
+-- NCNN_VERSION_STRING = 1.0.20251208
+-- The C compiler identification is GNU 15.2.0
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/msys64/mingw64/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test NCNN_COMPILER_SUPPORT_GNU_INLINE_ASM
+-- Performing Test NCNN_COMPILER_SUPPORT_GNU_INLINE_ASM - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_RECIP_NONE
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_RECIP_NONE - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_FMA
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_FMA - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_XOP
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_XOP - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_F16C
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_F16C - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX2
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX2 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT8
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT8 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT16
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT16 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_NE_CONVERT
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_NE_CONVERT - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_VNNI
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_VNNI - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_BF16
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_BF16 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_FP16
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_FP16 - Success
+-- Target arch: x86 64bit
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR - Success
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+CMake Warning at examples/CMakeLists.txt:88 (message):
+  OpenCV not found and NCNN_SIMPLEOCV disabled, examples won't be built
+-- Could NOT find protobuf (missing: protobuf_DIR)
+-- Could NOT find Protobuf (missing: Protobuf_LIBRARIES Protobuf_INCLUDE_DIR) 
+CMake Warning at tools/caffe/CMakeLists.txt:38 (message):
+  Protobuf not found, caffe model convert tool won't be built
+-- Configuring done (34.6s)
+-- Generating done (0.4s)
+-- Build files have been written to: C:/opencode-1.0.134/ncnn-vulkan/build
+[1/722] Generating source batchnorm_x86_avx512.h
+[2/722] Generating source batchnorm_x86_avx512.cpp
+[3/722] Generating source batchnorm_x86_fma.h
+[4/722] Generating source batchnorm_x86_fma.cpp
+[5/722] Generating source batchnorm_x86_avx.h
+[6/722] Generating source batchnorm_x86_avx.cpp
+[7/722] Generating source bias_x86_avx512.cpp
+[8/722] Generating source bias_x86_avx512.h
+[9/722] Generating source bias_x86_fma.h
+[10/722] Generating source bias_x86_fma.cpp
+[11/722] Generating source bias_x86_avx.h
+[12/722] Generating source bias_x86_avx.cpp
+[13/722] Generating source bnll_x86_avx512.h
+[14/722] Generating source bnll_x86_avx512.cpp
+[15/722] Generating source bnll_x86_fma.h
+[16/722] Generating source bnll_x86_fma.cpp
+[17/722] Generating source bnll_x86_avx.cpp
+[18/722] Generating source bnll_x86_avx.h
+[19/722] Generating source concat_x86_avx512.cpp
+[20/722] Generating source concat_x86_avx512.h
+[21/722] Generating source concat_x86_fma.cpp
+[22/722] Generating source concat_x86_fma.h
+[23/722] Generating source concat_x86_avx.cpp
+[24/722] Generating source concat_x86_avx.h
+[25/722] Generating source convolution_x86_avx512.h
+[26/722] Generating source convolution_x86_avx512.cpp
+[27/722] Generating source convolution_x86_fma.h
+[28/722] Generating source convolution_x86_fma.cpp
+[29/722] Generating source convolution_x86_avx.h
+[30/722] Generating source convolution_x86_avx.cpp
+[31/722] Generating source crop_x86_avx512.h
+[32/722] Generating source crop_x86_avx512.cpp
+[33/722] Generating source crop_x86_fma.h
+[34/722] Generating source crop_x86_fma.cpp
+[35/722] Generating source crop_x86_avx.h
+[36/722] Generating source crop_x86_avx.cpp
+[37/722] Generating source deconvolution_x86_avx512.h
+[38/722] Generating source deconvolution_x86_avx512.cpp
+[39/722] Generating source deconvolution_x86_fma.h
+[40/722] Generating source deconvolution_x86_avx.h
+[41/722] Generating source deconvolution_x86_fma.cpp
+[42/722] Generating source dropout_x86_avx512.h
+[43/722] Generating source deconvolution_x86_avx.cpp
+[44/722] Generating source dropout_x86_avx512.cpp
+[45/722] Generating source dropout_x86_fma.h
+[46/722] Generating source dropout_x86_fma.cpp
+[47/722] Generating source dropout_x86_avx.h
+[48/722] Generating source dropout_x86_avx.cpp
+[49/722] Generating source eltwise_x86_avx512.h
+[50/722] Generating source eltwise_x86_avx512.cpp
+[51/722] Generating source eltwise_x86_fma.h
+[52/722] Generating source eltwise_x86_fma.cpp
+[53/722] Generating source eltwise_x86_avx.h
+[54/722] Generating source elu_x86_avx512.h
+[55/722] Generating source eltwise_x86_avx.cpp
+[56/722] Generating source elu_x86_fma.h
+[57/722] Generating source elu_x86_avx512.cpp
+[58/722] Generating source elu_x86_avx.h
+[59/722] Generating source elu_x86_fma.cpp
+[60/722] Generating source elu_x86_avx.cpp
+[61/722] Generating source flatten_x86_avx512.h
+[62/722] Generating source flatten_x86_avx512.cpp
+[63/722] Generating source flatten_x86_fma.h
+[64/722] Generating source flatten_x86_fma.cpp
+[65/722] Generating source flatten_x86_avx.h
+[66/722] Generating source flatten_x86_avx.cpp
+[67/722] Generating source innerproduct_x86_avx512.h
+[68/722] Generating source innerproduct_x86_avx512.cpp
+[69/722] Generating source innerproduct_x86_fma.h
+[70/722] Generating source innerproduct_x86_fma.cpp
+[71/722] Generating source innerproduct_x86_avx.h
+[72/722] Generating source innerproduct_x86_avx.cpp
+[73/722] Generating source lrn_x86_avx512.cpp
+[74/722] Generating source lrn_x86_avx512.h
+[75/722] Generating source lrn_x86_fma.h
+[76/722] Generating source lrn_x86_fma.cpp
+[77/722] Generating source lrn_x86_avx.h
+[78/722] Generating source lrn_x86_avx.cpp
+[79/722] Generating source pooling_x86_avx512.h
+[80/722] Generating source pooling_x86_avx512.cpp
+[81/722] Generating source pooling_x86_fma.h
+[82/722] Generating source pooling_x86_fma.cpp
+[83/722] Generating source pooling_x86_avx.cpp
+[84/722] Generating source pooling_x86_avx.h
+[85/722] Generating source prelu_x86_avx512.h
+[86/722] Generating source prelu_x86_avx512.cpp
+[87/722] Generating source prelu_x86_fma.cpp
+[88/722] Generating source prelu_x86_fma.h
+[89/722] Generating source prelu_x86_avx.h
+[90/722] Generating source prelu_x86_avx.cpp
+[91/722] Generating source relu_x86_avx512.h
+[92/722] Generating source relu_x86_avx512.cpp
+[93/722] Generating source relu_x86_fma.h
+[94/722] Generating source relu_x86_fma.cpp
+[95/722] Generating source relu_x86_avx.cpp
+[96/722] Generating source relu_x86_avx.h
+[97/722] Generating source reshape_x86_avx512.h
+[98/722] Generating source reshape_x86_avx512.cpp
+[99/722] Generating source reshape_x86_fma.h
+[100/722] Generating source reshape_x86_fma.cpp
+[101/722] Generating source reshape_x86_avx.h
+[102/722] Generating source reshape_x86_avx.cpp
+[103/722] Generating source scale_x86_avx512.h
+[104/722] Generating source scale_x86_avx512.cpp
+[105/722] Generating source scale_x86_fma.h
+[106/722] Generating source scale_x86_fma.cpp
+[107/722] Generating source scale_x86_avx.h
+[108/722] Generating source scale_x86_avx.cpp
+[109/722] Generating source sigmoid_x86_avx512.h
+[110/722] Generating source sigmoid_x86_avx512.cpp
+[111/722] Generating source sigmoid_x86_fma.h
+[112/722] Generating source sigmoid_x86_fma.cpp
+[113/722] Generating source sigmoid_x86_avx.h
+[114/722] Generating source slice_x86_avx512.h
+[115/722] Generating source sigmoid_x86_avx.cpp
+[116/722] Generating source slice_x86_avx512.cpp
+[117/722] Generating source slice_x86_fma.h
+[118/722] Generating source slice_x86_fma.cpp
+[119/722] Generating source slice_x86_avx.h
+[120/722] Generating source softmax_x86_avx512.h
+[121/722] Generating source slice_x86_avx.cpp
+[122/722] Generating source softmax_x86_avx512.cpp
+[123/722] Generating source softmax_x86_fma.h
+[124/722] Generating source softmax_x86_fma.cpp
+[125/722] Generating source softmax_x86_avx.h
+[126/722] Generating source softmax_x86_avx.cpp
+[127/722] Generating source tanh_x86_avx512.h
+[128/722] Generating source tanh_x86_avx512.cpp
+[129/722] Generating source tanh_x86_fma.h
+[130/722] Generating source tanh_x86_fma.cpp
+[131/722] Generating source tanh_x86_avx.h
+[132/722] Generating source tanh_x86_avx.cpp
+[133/722] Generating source lstm_x86_avx512.h
+[134/722] Generating source lstm_x86_avx512.cpp
+[135/722] Generating source lstm_x86_fma.h
+[136/722] Generating source lstm_x86_fma.cpp
+[137/722] Generating source lstm_x86_avx.h
+[138/722] Generating source lstm_x86_avx.cpp
+[139/722] Generating source binaryop_x86_avx512.h
+[140/722] Generating source binaryop_x86_avx512.cpp
+[141/722] Generating source binaryop_x86_fma.h
+[142/722] Generating source binaryop_x86_fma.cpp
+[143/722] Generating source binaryop_x86_avx.h
+[144/722] Generating source binaryop_x86_avx.cpp
+[145/722] Generating source unaryop_x86_avx512.h
+[146/722] Generating source unaryop_x86_avx512.cpp
+[147/722] Generating source unaryop_x86_fma.h
+[148/722] Generating source unaryop_x86_fma.cpp
+[149/722] Generating source unaryop_x86_avx.h
+[150/722] Generating source unaryop_x86_avx.cpp
+[151/722] Generating source convolutiondepthwise_x86_avx512.h
+[152/722] Generating source convolutiondepthwise_x86_avx512.cpp
+[153/722] Generating source convolutiondepthwise_x86_fma.h
+[154/722] Generating source convolutiondepthwise_x86_fma.cpp
+[155/722] Generating source convolutiondepthwise_x86_avx.h
+[156/722] Generating source convolutiondepthwise_x86_avx.cpp
+[157/722] Generating source padding_x86_avx512.h
+[158/722] Generating source padding_x86_avx512.cpp
+[159/722] Generating source padding_x86_fma.h
+[160/722] Generating source padding_x86_fma.cpp
+[161/722] Generating source padding_x86_avx.h
+[162/722] Generating source padding_x86_avx.cpp
+[163/722] Generating source interp_x86_avx512.h
+[164/722] Generating source interp_x86_avx512.cpp
+[165/722] Generating source interp_x86_fma.h
+[166/722] Generating source interp_x86_fma.cpp
+[167/722] Generating source interp_x86_avx.h
+[168/722] Generating source interp_x86_avx.cpp
+[169/722] Generating source deconvolutiondepthwise_x86_avx512.h
+[170/722] Generating source deconvolutiondepthwise_x86_avx512.cpp
+[171/722] Generating source deconvolutiondepthwise_x86_fma.h
+[172/722] Generating source deconvolutiondepthwise_x86_fma.cpp
+[173/722] Generating source deconvolutiondepthwise_x86_avx.h
+[174/722] Generating source deconvolutiondepthwise_x86_avx.cpp
+[175/722] Generating source shufflechannel_x86_avx512.h
+[176/722] Generating source shufflechannel_x86_avx512.cpp
+[177/722] Generating source shufflechannel_x86_fma.h
+[178/722] Generating source shufflechannel_x86_avx.h
+[179/722] Generating source shufflechannel_x86_fma.cpp
+[180/722] Generating source instancenorm_x86_avx512.h
+[181/722] Generating source shufflechannel_x86_avx.cpp
+[182/722] Generating source instancenorm_x86_avx512.cpp
+[183/722] Generating source instancenorm_x86_fma.h
+[184/722] Generating source instancenorm_x86_fma.cpp
+[185/722] Generating source instancenorm_x86_avx.h
+[186/722] Generating source instancenorm_x86_avx.cpp
+[187/722] Generating source clip_x86_avx512.h
+[188/722] Generating source clip_x86_avx512.cpp
+[189/722] Generating source clip_x86_fma.h
+[190/722] Generating source clip_x86_fma.cpp
+[191/722] Generating source clip_x86_avx.cpp
+[192/722] Generating source clip_x86_avx.h
+[193/722] Generating source quantize_x86_avx512.cpp
+[194/722] Generating source quantize_x86_avx512.h
+[195/722] Generating source quantize_x86_fma.cpp
+[196/722] Generating source quantize_x86_fma.h
+[197/722] Generating source quantize_x86_avx.h
+[198/722] Generating source quantize_x86_avx.cpp
+[199/722] Generating source dequantize_x86_avx512.h
+[200/722] Generating source dequantize_x86_avx512.cpp
+[201/722] Generating source dequantize_x86_fma.h
+[202/722] Generating source dequantize_x86_fma.cpp
+[203/722] Generating source dequantize_x86_avx.h
+[204/722] Generating source dequantize_x86_avx.cpp
+[205/722] Generating source yolov3detectionoutput_x86_avx512.h
+[206/722] Generating source yolov3detectionoutput_x86_avx512.cpp
+[207/722] Generating source yolov3detectionoutput_x86_fma.h
+[208/722] Generating source yolov3detectionoutput_x86_fma.cpp
+[209/722] Generating source yolov3detectionoutput_x86_avx.h
+[210/722] Generating source yolov3detectionoutput_x86_avx.cpp
+[211/722] Generating source roialign_x86_avx512.h
+[212/722] Generating source roialign_x86_avx512.cpp
+[213/722] Generating source roialign_x86_fma.h
+[214/722] Generating source roialign_x86_fma.cpp
+[215/722] Generating source roialign_x86_avx.h
+[216/722] Generating source roialign_x86_avx.cpp
+[217/722] Generating source packing_x86_avx512.h
+[218/722] Generating source packing_x86_fma.h
+[219/722] Generating source packing_x86_avx512.cpp
+[220/722] Generating source packing_x86_avx.h
+[221/722] Generating source packing_x86_fma.cpp
+[222/722] Generating source packing_x86_avx.cpp
+[223/722] Generating source requantize_x86_avx512.h
+[224/722] Generating source requantize_x86_avx512.cpp
+[225/722] Generating source requantize_x86_fma.h
+[226/722] Generating source requantize_x86_fma.cpp
+[227/722] Generating source requantize_x86_avx.h
+[228/722] Generating source requantize_x86_avx.cpp
+[229/722] Generating source cast_x86_avx512.h
+[230/722] Generating source cast_x86_avx512.cpp
+[231/722] Generating source cast_x86_fma.h
+[232/722] Generating source cast_x86_fma.cpp
+[233/722] Generating source cast_x86_avx.h
+[234/722] Generating source cast_x86_avx.cpp
+[235/722] Generating source hardsigmoid_x86_avx512.h
+[236/722] Generating source hardsigmoid_x86_avx512.cpp
+[237/722] Generating source hardsigmoid_x86_fma.h
+[238/722] Generating source hardsigmoid_x86_fma.cpp
+[239/722] Generating source hardsigmoid_x86_avx.h
+[240/722] Generating source hardsigmoid_x86_avx.cpp
+[241/722] Generating source selu_x86_avx512.h
+[242/722] Generating source selu_x86_avx512.cpp
+[243/722] Generating source selu_x86_fma.h
+[244/722] Generating source selu_x86_fma.cpp
+[245/722] Generating source selu_x86_avx.h
+[246/722] Generating source selu_x86_avx.cpp
+[247/722] Generating source hardswish_x86_avx512.h
+[248/722] Generating source hardswish_x86_avx512.cpp
+[249/722] Generating source hardswish_x86_fma.h
+[250/722] Generating source hardswish_x86_fma.cpp
+[251/722] Generating source hardswish_x86_avx.cpp
+[252/722] Generating source hardswish_x86_avx.h
+[253/722] Generating source mish_x86_avx512.h
+[254/722] Generating source mish_x86_avx512.cpp
+[255/722] Generating source mish_x86_fma.cpp
+[256/722] Generating source mish_x86_fma.h
+[257/722] Generating source mish_x86_avx.h
+[258/722] Generating source mish_x86_avx.cpp
+[259/722] Generating source swish_x86_avx512.h
+[260/722] Generating source swish_x86_avx512.cpp
+[261/722] Generating source swish_x86_fma.h
+[262/722] Generating source swish_x86_fma.cpp
+[263/722] Generating source swish_x86_avx.h
+[264/722] Generating source swish_x86_avx.cpp
+[265/722] Generating source gemm_x86_avx512.h
+[266/722] Generating source gemm_x86_avx512.cpp
+[267/722] Generating source gemm_x86_fma.h
+[268/722] Generating source gemm_x86_fma.cpp
+[269/722] Generating source gemm_x86_avx.h
+[270/722] Generating source groupnorm_x86_avx512.h
+[271/722] Generating source gemm_x86_avx.cpp
+[272/722] Generating source groupnorm_x86_avx512.cpp
+[273/722] Generating source groupnorm_x86_fma.h
+[274/722] Generating source groupnorm_x86_fma.cpp
+[275/722] Generating source groupnorm_x86_avx.h
+[276/722] Generating source groupnorm_x86_avx.cpp
+[277/722] Generating source layernorm_x86_avx512.h
+[278/722] Generating source layernorm_x86_avx512.cpp
+[279/722] Generating source layernorm_x86_fma.h
+[280/722] Generating source layernorm_x86_fma.cpp
+[281/722] Generating source layernorm_x86_avx.h
+[282/722] Generating source layernorm_x86_avx.cpp
+[283/722] Generating source multiheadattention_x86_avx512.h
+[284/722] Generating source multiheadattention_x86_avx512.cpp
+[285/722] Generating source multiheadattention_x86_fma.cpp
+[286/722] Generating source multiheadattention_x86_fma.h
+[287/722] Generating source multiheadattention_x86_avx.cpp
+[288/722] Generating source multiheadattention_x86_avx.h
+[289/722] Generating source gelu_x86_avx512.h
+[290/722] Generating source gelu_x86_avx512.cpp
+[291/722] Generating source gelu_x86_fma.cpp
+[292/722] Generating source gelu_x86_fma.h
+[293/722] Generating source gelu_x86_avx.h
+[294/722] Generating source gelu_x86_avx.cpp
+[295/722] Generating source convolution1d_x86_avx512.h
+[296/722] Generating source convolution1d_x86_avx512.cpp
+[297/722] Generating source convolution1d_x86_fma.cpp
+[298/722] Generating source convolution1d_x86_fma.h
+[299/722] Generating source convolution1d_x86_avx.h
+[300/722] Generating source convolution1d_x86_avx.cpp
+[301/722] Generating source matmul_x86_avx512.h
+[302/722] Generating source matmul_x86_avx512.cpp
+[303/722] Generating source matmul_x86_fma.cpp
+[304/722] Generating source matmul_x86_fma.h
+[305/722] Generating source matmul_x86_avx.h
+[306/722] Generating source matmul_x86_avx.cpp
+[307/722] Generating source deformableconv2d_x86_avx512.h
+[308/722] Generating source deformableconv2d_x86_avx512.cpp
+[309/722] Generating source deformableconv2d_x86_fma.h
+[310/722] Generating source deformableconv2d_x86_fma.cpp
+[311/722] Generating source deformableconv2d_x86_avx.h
+[312/722] Generating source deformableconv2d_x86_avx.cpp
+[313/722] Generating source gridsample_x86_avx512.h
+[314/722] Generating source gridsample_x86_avx512.cpp
+[315/722] Generating source gridsample_x86_fma.h
+[316/722] Generating source gridsample_x86_fma.cpp
+[317/722] Generating source gridsample_x86_avx.h
+[318/722] Generating source gridsample_x86_avx.cpp
+[319/722] Generating source rmsnorm_x86_avx512.h
+[320/722] Generating source rmsnorm_x86_avx512.cpp
+[321/722] Generating source rmsnorm_x86_fma.cpp
+[322/722] Generating source rmsnorm_x86_fma.h
+[323/722] Generating source rmsnorm_x86_avx.h
+[324/722] Generating source rmsnorm_x86_avx.cpp
+[325/722] Generating source sdpa_x86_avx512.h
+[326/722] Generating source sdpa_x86_avx512.cpp
+[327/722] Generating source sdpa_x86_fma.h
+[328/722] Generating source sdpa_x86_fma.cpp
+[329/722] Generating source sdpa_x86_avx.h
+[330/722] Generating source sdpa_x86_avx.cpp
+[331/722] Building CXX object tools/CMakeFiles/ncnnmerge.dir/ncnnmerge.cpp.obj
+[332/722] Building CXX object src/CMakeFiles/ncnn.dir/allocator.cpp.obj
+[333/722] Building CXX object src/CMakeFiles/ncnn.dir/benchmark.cpp.obj
+[334/722] Building CXX object src/CMakeFiles/ncnn.dir/blob.cpp.obj
+[335/722] Building CXX object src/CMakeFiles/ncnn.dir/c_api.cpp.obj
+[336/722] Building CXX object src/CMakeFiles/ncnn.dir/command.cpp.obj
+[337/722] Building CXX object src/CMakeFiles/ncnn.dir/cpu.cpp.obj
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'int get_physical_cpucount()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:992:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPI' {aka 'int (*)(_SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, long unsigned int*)'} [-Wcast-function-type]
+  992 |     LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'int get_cpu_level2_cachesize()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1235:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPI' {aka 'int (*)(_SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, long unsigned int*)'} [-Wcast-function-type]
+ 1235 |     LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'int get_cpu_level3_cachesize()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1305:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPI' {aka 'int (*)(_SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, long unsigned int*)'} [-Wcast-function-type]
+ 1305 |     LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'ncnn::CpuSet get_smt_cpu_mask()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1356:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPI' {aka 'int (*)(_SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, long unsigned int*)'} [-Wcast-function-type]
+ 1356 |     LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'std::vector<int> get_max_freq_mhz()':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1408:22: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_CNPI' {aka 'long int (*)(POWER_INFORMATION_LEVEL, void*, long unsigned int, void*, long unsigned int)'} [-Wcast-function-type]
+ 1408 |     LPFN_CNPI cnpi = (LPFN_CNPI)GetProcAddress(powrprof, "CallNtPowerInformation");
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from C:/opencode-1.0.134/ncnn-vulkan/src/cpu.h:17,
+                 from C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:4:
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'int set_sched_affinity(const ncnn::CpuSet&)':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1438:19: warning: format '%d' expects argument of type 'int', but argument 3 has type 'DWORD' {aka 'long unsigned int'} [-Wformat=]
+ 1438 |         NCNN_LOGE("SetThreadAffinityMask failed %d", GetLastError());
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~
+      |                                                                  |
+      |                                                                  DWORD {aka long unsigned int}
+C:/opencode-1.0.134/ncnn-vulkan/build/src/platform.h:347:23: note: in definition of macro 'NCNN_LOGE'
+  347 |     fprintf(stderr, ##__VA_ARGS__); fprintf(stderr, "\n"); } while(0)
+      |                       ^~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1438:50: note: format string is defined here
+ 1438 |         NCNN_LOGE("SetThreadAffinityMask failed %d", GetLastError());
+      |                                                 ~^
+      |                                                  |
+      |                                                  int
+      |                                                 %ld
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'void initialize_cpu_thread_affinity_mask(ncnn::CpuSet&, ncnn::CpuSet&, ncnn::CpuSet&)':
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1631:24: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'LPFN_GLPIE' {aka 'int (*)(LOGICAL_PROCESSOR_RELATIONSHIP, _SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*, long unsigned int*)'} [-Wcast-function-type]
+ 1631 |     LPFN_GLPIE glpie = (LPFN_GLPIE)GetProcAddress(kernel32, "GetLogicalProcessorInformationEx");
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1693:35: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<std::pair<long unsigned int, bool> >::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+ 1693 |                 for (int j = 0; j < processorCoreType.size(); j++)
+      |                                 ~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp:1696:33: warning: comparison of integer expressions of different signedness: 'long unsigned int' and 'int' [-Wsign-compare]
+ 1696 |                     if (p.first == i)
+      |                         ~~~~~~~~^~~~
+[338/722] Building CXX object src/CMakeFiles/ncnn.dir/datareader.cpp.obj
+[339/722] Building CXX object src/CMakeFiles/ncnn.dir/expression.cpp.obj
+[340/722] Building CXX object src/CMakeFiles/ncnn.dir/gguf.cpp.obj
+[341/722] Building CXX object src/CMakeFiles/ncnn.dir/gpu.cpp.obj
+[342/722] Building CXX object src/CMakeFiles/ncnn.dir/mat.cpp.obj
+[343/722] Building CXX object src/CMakeFiles/ncnn.dir/layer.cpp.obj
+[344/722] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel.cpp.obj
+[345/722] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel_affine.cpp.obj
+[346/722] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel_drawing.cpp.obj
+[347/722] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel_rotate.cpp.obj
+[348/722] Building CXX object src/CMakeFiles/ncnn.dir/modelbin.cpp.obj
+[349/722] Building CXX object src/CMakeFiles/ncnn.dir/option.cpp.obj
+[350/722] Building CXX object src/CMakeFiles/ncnn.dir/net.cpp.obj
+[351/722] Building CXX object src/CMakeFiles/ncnn.dir/paramdict.cpp.obj
+[352/722] Building CXX object src/CMakeFiles/ncnn.dir/pipeline.cpp.obj
+[353/722] Building CXX object src/CMakeFiles/ncnn.dir/pipelinecache.cpp.obj
+[354/722] Building CXX object src/CMakeFiles/ncnn.dir/simpleocv.cpp.obj
+[355/722] Building CXX object src/CMakeFiles/ncnn.dir/simpleomp.cpp.obj
+[356/722] Building CXX object src/CMakeFiles/ncnn.dir/simplestl.cpp.obj
+[357/722] Building CXX object src/CMakeFiles/ncnn.dir/simplemath.cpp.obj
+[358/722] Building CXX object src/CMakeFiles/ncnn.dir/simplevk.cpp.obj
+[359/722] Building CXX object src/CMakeFiles/ncnn.dir/layer/absval.cpp.obj
+[360/722] Building CXX object src/CMakeFiles/ncnn.dir/layer/batchnorm.cpp.obj
+[361/722] Building CXX object src/CMakeFiles/ncnn.dir/llm_engine.cpp.obj
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp: In member function 'int ncnn::InnerProduct::forward(const ncnn::Mat&, ncnn::Mat&, const ncnn::Option&) const':
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:15:70: warning: unused parameter 'opt' [-Wunused-parameter]
+   15 |     int forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const {
+      |                                                        ~~~~~~~~~~~~~~^~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp: In member function 'int ncnn::LayerNorm::forward(const ncnn::Mat&, ncnn::Mat&, const ncnn::Option&) const':
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:40:70: warning: unused parameter 'opt' [-Wunused-parameter]
+   40 |     int forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const {
+      |                                                        ~~~~~~~~~~~~~~^~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp: In member function 'ncnn::Mat ncnn::LLMEngine::forward_layer(int, const ncnn::Mat&, int)':
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:275:23: warning: comparison of integer expressions of different signedness: 'int' and 'size_t' {aka 'long long unsigned int'} [-Wsign-compare]
+  275 |     for (int i = 0; i < x.total(); i++) {
+      |                     ~~^~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:302:23: warning: comparison of integer expressions of different signedness: 'int' and 'size_t' {aka 'long long unsigned int'} [-Wsign-compare]
+  302 |     for (int i = 0; i < gate_out.total(); i++) {
+      |                     ~~^~~~~~~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:313:23: warning: comparison of integer expressions of different signedness: 'int' and 'size_t' {aka 'long long unsigned int'} [-Wsign-compare]
+  313 |     for (int i = 0; i < res.total(); i++) {
+      |                     ~~^~~~~~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp:253:63: warning: unused parameter 'start_pos' [-Wunused-parameter]
+  253 | Mat LLMEngine::forward_layer(int layer_idx, const Mat& x, int start_pos)
+      |                                                           ~~~~^~~~~~~~~
+C:/opencode-1.0.134/ncnn-vulkan/src/llm_engine.cpp: In member function 'int ncnn::LLMEngine::sample_token(const float*, const ncnn::GenerationConfig&, const std:
+<bash_metadata>
+bash tool truncated output as it exceeded 30000 char limit
+bash tool terminated commmand after exceeding timeout 600000 ms
+</bash_metadata>
