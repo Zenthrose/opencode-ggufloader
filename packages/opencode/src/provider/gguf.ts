@@ -1,5 +1,5 @@
 import z from "zod"
-import { createOpenAICompatible } from "@ai-sdk/openai-compatible"
+import { createNcnn } from "./ncnn"
 import { generateId } from "../util/id"
 import { CompatibilityChecker } from "./compatibility-checker"
 import { getModelRequirements } from "./model-database"
@@ -12,7 +12,7 @@ export const ggufConfigSchema = z.object({
   contextLength: z.number().optional().default(4096),
   temperature: z.number().optional().default(0.8),
   gpuLayers: z.number().optional().default(-1), // -1 = auto-detect
-  vulkan: z.boolean().optional().default(true)
+  vulkan: z.boolean().optional().default(true),
 })
 
 export type GgufConfig = z.infer<typeof ggufConfigSchema>
@@ -25,14 +25,11 @@ export function createGgufProvider(config: GgufConfig) {
     throw new Error(`Model not compatible: ${compatibility.reason}`)
   }
 
-  // For now, create a mock OpenAI-compatible provider
-  // This will be replaced with actual ncnn-vulkan integration
-  const mockBaseURL = "http://localhost:8080/v1" // Placeholder for future REST API
-
-  return createOpenAICompatible({
-    name: "gguf",
-    apiKey: "mock-key", // Not used for local inference
-    baseURL: mockBaseURL
+  // Create ncnn provider for actual GGUF model loading and inference
+  return createNcnn({
+    modelPath: config.modelPath,
+    gpuLayers: config.gpuLayers,
+    contextLength: config.contextLength,
   })
 }
 
@@ -40,16 +37,16 @@ export function createGgufProvider(config: GgufConfig) {
 export function checkModelCompatibility(modelId: string, config?: Partial<GgufConfig>) {
   // Import Hardware class dynamically to avoid circular dependencies
   const { Hardware } = require("../ncnn-binding")
-  
+
   try {
     const hardware = new Hardware()
     const systemInfo = hardware.getSystemInfo()
-    
+
     // Add Vulkan info if available
     if (hardware.isVulkanAvailable()) {
       systemInfo.vulkan = hardware.getVulkanInfo()
     }
-    
+
     return CompatibilityChecker.checkCompatibility(modelId, systemInfo)
   } catch (error) {
     return {
@@ -58,7 +55,7 @@ export function checkModelCompatibility(modelId: string, config?: Partial<GgufCo
       warnings: [],
       performance_tier: "unusable" as const,
       recommendations: ["Install Vulkan drivers", "Check system requirements"],
-      missing_requirements: ["system_detection"]
+      missing_requirements: ["system_detection"],
     }
   }
 }
@@ -72,7 +69,7 @@ export const ggufModels = {
     contextLength: 4096,
     recommended: true,
     memoryRequired: 4.2 * 1024 * 1024 * 1024, // 4.2GB
-    supportsVulkan: true
+    supportsVulkan: true,
   },
   "llama-3-8b": {
     id: "llama-3-8b",
@@ -81,7 +78,7 @@ export const ggufModels = {
     contextLength: 8192,
     recommended: true,
     memoryRequired: 8.5 * 1024 * 1024 * 1024, // 8.5GB
-    supportsVulkan: true
+    supportsVulkan: true,
   },
   "qwen-1.5b": {
     id: "qwen-1.5b",
@@ -90,8 +87,8 @@ export const ggufModels = {
     contextLength: 32768,
     recommended: true,
     memoryRequired: 1.2 * 1024 * 1024 * 1024, // 1.2GB
-    supportsVulkan: true
-  }
+    supportsVulkan: true,
+  },
 }
 
 // Hardware compatibility checker
@@ -105,7 +102,7 @@ export function checkHardwareCompatibility(modelId: string, hardware: any) {
   if (model.memoryRequired > availableMemory) {
     return {
       compatible: false,
-      reason: `Insufficient memory: ${model.displayName} requires ${(model.memoryRequired / (1024*1024*1024)).toFixed(1)}GB, only ${(availableMemory / (1024*1024*1024)).toFixed(1)}GB available`
+      reason: `Insufficient memory: ${model.displayName} requires ${(model.memoryRequired / (1024 * 1024 * 1024)).toFixed(1)}GB, only ${(availableMemory / (1024 * 1024 * 1024)).toFixed(1)}GB available`,
     }
   }
 
@@ -113,7 +110,7 @@ export function checkHardwareCompatibility(modelId: string, hardware: any) {
     return {
       compatible: true, // Still compatible, just slower
       reason: "Vulkan not available - will use CPU-only mode (slower)",
-      warning: true
+      warning: true,
     }
   }
 
