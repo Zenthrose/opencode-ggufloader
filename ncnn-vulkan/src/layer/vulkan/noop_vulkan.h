@@ -14,6 +14,7 @@ public:
     Noop_vulkan();
 
     using Noop::forward;
+    using Noop::forward_inplace;
     virtual int forward_inplace(std::vector<VkMat>& bottom_top_blobs, VkCompute& cmd, const Option& opt) const;
 };
 

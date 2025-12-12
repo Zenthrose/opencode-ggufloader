@@ -1,0 +1,168 @@
+c:\opencode-1.0.134>set PATH=C:\msys64\mingw64\bin;%PATH% && set CC=C:\msys64\mingw64\bin\gcc.exe && set CXX=C:\msys64\mingw64\bin\g++.exe && cd ncnn-vulkan && rmdir /s /q build 2>nul && mkdir build && cd build && cmake .. -G Ninja -DCMAKE_CXX_COMPILER=C:\msys64\mingw64\bin\g++.exe -DCMAKE_C_COMPILER=C:\msys64\mingw64\bin\gcc.exe -DNCNN_VULKAN=ON -DNCNN_SYSTEM_GLSLANG=ON -Dglslang_DIR=%VULKAN_SDK%\Lib\cmake\glslang -DGLSLANG_TARGET_DIR=%VULKAN_SDK%\Lib\cmake\glslang -DCMAKE_BUILD_TYPE=RelWithDebInfo -DNCNN_BUILD_TOOLS=OFF -DNCNN_BUILD_EXAMPLES=OFF -DNCNN_BUILD_TESTS=OFF -DNCNN_BUILD_BENCHMARK=OFF -DNCNN_SIMPLEVK=ON -DCMAKE_CXX_FLAGS=-I%VULKAN_SDK%\Include && cmake --build . --config RelWithDebInfo -j 2 && cd ..\..\packages\opencode\src\ncnn-binding && rmdir /s /q build 2>nul && set C_INCLUDE_PATH=%CD%\..\..\..\..\..\ncnn-vulkan\src && set LIBRARY_PATH=%CD%\..\..\..\..\..\ncnn-vulkan\build\src && npm run build && cd ..\..\.. && npm run build
+-- CMAKE_INSTALL_PREFIX = C:/opencode-1.0.134/ncnn-vulkan/build/install
+-- NCNN_VERSION_STRING = 1.0.20251212
+-- The C compiler identification is GNU 15.2.0
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/msys64/mingw64/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test NCNN_COMPILER_SUPPORT_GNU_INLINE_ASM
+-- Performing Test NCNN_COMPILER_SUPPORT_GNU_INLINE_ASM - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_RECIP_NONE
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_RECIP_NONE - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_FMA
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_FMA - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_XOP
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_XOP - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_F16C
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_F16C - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX2
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX2 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT8
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT8 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT16
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_VNNI_INT16 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_NE_CONVERT
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX_NE_CONVERT - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_VNNI
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_VNNI - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_BF16
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_BF16 - Success
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_FP16
+-- Performing Test NCNN_COMPILER_SUPPORT_X86_AVX512_FP16 - Success
+-- Target arch: x86 64bit
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found glslang: C:/VulkanSDK/1.3.296.0/lib/glslangd.lib (found version "15.0.0")
+-- Found SPIRV: C:/VulkanSDK/1.3.296.0/lib/SPIRVd.lib (found version "15.0.0")
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR - Success
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Configuring done (33.7s)
+-- Generating done (0.5s)
+-- Build files have been written to: C:/opencode-1.0.134/ncnn-vulkan/build
+[998/998] Linking CXX static library src\libncnn.a
+
+> @opencode-ai/ncnn-binding@0.1.0 build
+> cmake-js compile -G Ninja
+
+info TOOL Using Ninja generator, as specified from commandline.
+info CMD CONFIGURE
+info RUN [
+info RUN   'cmake',
+info RUN   'c:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding',
+info RUN   '--no-warn-unused-cli',
+info RUN   '-G',
+info RUN   'Ninja',
+info RUN   '-DCMAKE_JS_VERSION=7.4.0',
+info RUN   '-DCMAKE_BUILD_TYPE=Release',
+info RUN   '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=c:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build',
+info RUN   '-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded$<$<CONFIG:Debug>:Debug>',
+info RUN   '-DCMAKE_JS_INC=C:\\Users\\Zenthrose\\.cmake-js\\node-x64\\v25.2.1\\include\\node',
+info RUN   '-DCMAKE_JS_SRC=c:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/cmake-js/lib/cpp/win_delay_load_hook.cc',
+info RUN   '-DNODE_RUNTIME=node',
+info RUN   '-DNODE_RUNTIMEVERSION=25.2.1',
+info RUN   '-DNODE_ARCH=x64',
+info RUN   '-DCMAKE_JS_LIB=C:\\Users\\Zenthrose\\.cmake-js\\node-x64\\v25.2.1\\win-x64\\node.lib',
+info RUN   '-DCMAKE_SHARED_LINKER_FLAGS=/DELAYLOAD:NODE.EXE'
+info RUN ]
+Not searching for unused variables given on the command line.
+-- The C compiler identification is GNU 15.2.0
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/msys64/mingw64/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Configuring done (12.9s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build
+info CMD BUILD
+info RUN [
+info RUN   'cmake',
+info RUN   '--build',
+info RUN   'c:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build',
+info RUN   '--config',
+info RUN   'Release'
+info RUN ]
+ninja: error: 'C:/ncnn-vulkan/build/src/libncnn.a', needed by 'Release/ncnn_binding.node', missing and no known rule to make it
+info REP Build has been failed, trying to do a full rebuild.
+info CMD CLEAN
+info RUN [
+info RUN   'cmake',
+info RUN   '-E',
+info RUN   'remove_directory',
+info RUN   'c:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build'
+info RUN ]
+info CMD CONFIGURE
+info RUN [
+info RUN   'cmake',
+info RUN   'c:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding',
+info RUN   '--no-warn-unused-cli',
+info RUN   '-G',
+info RUN   'Ninja',
+info RUN   '-DCMAKE_JS_VERSION=7.4.0',
+info RUN   '-DCMAKE_BUILD_TYPE=Release',
+info RUN   '-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=c:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build',
+info RUN   '-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded$<$<CONFIG:Debug>:Debug>',
+info RUN   '-DCMAKE_JS_INC=C:\\Users\\Zenthrose\\.cmake-js\\node-x64\\v25.2.1\\include\\node',
+info RUN   '-DCMAKE_JS_SRC=c:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/cmake-js/lib/cpp/win_delay_load_hook.cc',
+info RUN   '-DNODE_RUNTIME=node',
+info RUN   '-DNODE_RUNTIMEVERSION=25.2.1',
+info RUN   '-DNODE_ARCH=x64',
+info RUN   '-DCMAKE_JS_LIB=C:\\Users\\Zenthrose\\.cmake-js\\node-x64\\v25.2.1\\win-x64\\node.lib',
+info RUN   '-DCMAKE_SHARED_LINKER_FLAGS=/DELAYLOAD:NODE.EXE'
+info RUN ]
+Not searching for unused variables given on the command line.
+-- The C compiler identification is GNU 15.2.0
+-- The CXX compiler identification is GNU 15.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/msys64/mingw64/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Configuring done (13.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build
+info CMD BUILD
+info RUN [
+info RUN   'cmake',
+info RUN   '--build',
+info RUN   'c:\\opencode-1.0.134\\packages\\opencode\\src\\ncnn-binding\\build',
+info RUN   '--config',
+info RUN   'Release'
+info RUN ]
+ninja: error: 'C:/ncnn-vulkan/build/src/libncnn.a', needed by 'Release/ncnn_binding.node', missing and no known rule to make it
+ERR! OMG Process terminated: 1

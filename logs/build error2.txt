@@ -1,3 +1,8 @@
+C:\Users\Zenthrose>cd c:\poencode-1.0.134
+The system cannot find the path specified.
+
+C:\Users\Zenthrose>cd c:\opencode-1.0.134
+
 c:\opencode-1.0.134>set PATH=C:\msys64\mingw64\bin;%PATH% && set CC=C:\msys64\mingw64\bin\gcc.exe && set CXX=C:\msys64\mingw64\bin\g++.exe && cd C:\opencode-1.0.134\ncnn-vulkan && rmdir /s /q build 2>nul && mkdir build && cd build && cmake .. -G Ninja -DCMAKE_CXX_COMPILER=C:\msys64\mingw64\bin\g++.exe -DCMAKE_C_COMPILER=C:\msys64\mingw64\bin\gcc.exe -DNCNN_VULKAN=ON -DNCNN_SYSTEM_GLSLANG=ON -Dglslang_DIR=C:/VulkanSDK/1.3.296.0/Lib/cmake/glslang -DGLSLANG_TARGET_DIR=C:/VulkanSDK/1.3.296.0/Lib/cmake/glslang -DCMAKE_BUILD_TYPE=RelWithDebInfo -DNCNN_BUILD_TOOLS=OFF -DNCNN_BUILD_EXAMPLES=OFF -DNCNN_BUILD_TESTS=OFF -DNCNN_BUILD_BENCHMARK=OFF -DNCNN_SIMPLEVK=ON -DCMAKE_CXX_FLAGS="-IC:/VulkanSDK/1.3.296.0/Include" && cmake --build . --config RelWithDebInfo -j 2 && cd ..\..\packages\opencode\src\ncnn-binding && rmdir /s /q build 2>nul && set C_INCLUDE_PATH=C:\opencode-1.0.134\ncnn-vulkan\src && set LIBRARY_PATH=C:\opencode-1.0.134\ncnn-vulkan\build\src && set CC=C:\msys64\mingw64\bin\gcc.exe && set CXX=C:\msys64\mingw64\bin\g++.exe && npm run build && cd ..\..\.. && npm run build
 -- CMAKE_INSTALL_PREFIX = C:/opencode-1.0.134/ncnn-vulkan/build/install
 -- NCNN_VERSION_STRING = 1.0.20251211
@@ -54,8 +59,8 @@ c:\opencode-1.0.134>set PATH=C:\msys64\mingw64\bin;%PATH% && set CC=C:\msys64\mi
 -- Found OpenMP_C: -fopenmp (found version "4.5")
 -- Found OpenMP_CXX: -fopenmp (found version "4.5")
 -- Found OpenMP: TRUE (found version "4.5")
--- Configuring done (50.7s)
--- Generating done (0.5s)
+-- Configuring done (49.4s)
+-- Generating done (0.6s)
 -- Build files have been written to: C:/opencode-1.0.134/ncnn-vulkan/build
 [571/998] Building CXX object src/CMakeFiles/ncnn.dir/cpu.cpp.obj
 C:/opencode-1.0.134/ncnn-vulkan/src/cpu.cpp: In function 'int get_physical_cpucount()':
@@ -263,7 +268,7 @@ Not searching for unused variables given on the command line.
 -- Found OpenMP_C: -fopenmp (found version "4.5")
 -- Found OpenMP_CXX: -fopenmp (found version "4.5")
 -- Found OpenMP: TRUE (found version "4.5")
--- Configuring done (8.8s)
+-- Configuring done (6.6s)
 -- Generating done (0.1s)
 -- Build files have been written to: C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build
 info CMD BUILD
@@ -277,38 +282,9 @@ info RUN ]
 [1/4] Building CXX object CMakeFiles/ncnn_binding.dir/src/binding.cc.obj
 FAILED: [code=1] CMakeFiles/ncnn_binding.dir/src/binding.cc.obj
 C:\msys64\mingw64\bin\g++.exe -DNAPI_DISABLE_CPP_EXCEPTIONS -DNOMINMAX -Dncnn_binding_EXPORTS -IC:/Users/Zenthrose/.cmake-js/node-x64/v25.2.1/include/node -IC:/opencode-1.0.134/packages/opencode/src/ncnn-binding///"C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/node-addon-api/" -IC:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/node-addon-api -IC:/opencode-1.0.134/ncnn-vulkan/src -IC:/opencode-1.0.134/ncnn-vulkan/build/src -IC:/VulkanSDK/1.3.296.0/Include -IC:/VulkanSDK/1.3.296.0/Include/glslang -IC:/VulkanSDK/1.3.296.0/Include/SPIRV -O3 -DNDEBUG -fopenmp -MD -MT CMakeFiles/ncnn_binding.dir/src/binding.cc.obj -MF CMakeFiles\ncnn_binding.dir\src\binding.cc.obj.d -o CMakeFiles/ncnn_binding.dir/src/binding.cc.obj -c C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:12:29: error: typedef 'TShader_constructor_t' is initialized (use 'decltype' instead)
-   12 | typedef glslang::TShader* (*TShader_constructor_t)(glslang::EShLanguage);
-      |                             ^~~~~~~~~~~~~~~~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:12:61: error: 'EShLanguage' is not a member of 'glslang'; did you mean 'EShLanguage'?
-   12 | typedef glslang::TShader* (*TShader_constructor_t)(glslang::EShLanguage);
-      |                                                             ^~~~~~~~~~~
-In file included from C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:4:
-C:/VulkanSDK/1.3.296.0/Include/glslang/Public/ShaderLang.h:101:3: note: 'EShLanguage' declared here
-  101 | } EShLanguage;         // would be better as stage, but this is ancient now
-      |   ^~~~~~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:66: error: 'TBuiltInResource' in namespace 'glslang' does not name a type
-   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
-      |                                                                  ^~~~~~~~~~~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:90: error: 'glslang::EProfile' has not been declared
-   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
-      |                                                                                          ^~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:121: error: 'glslang::EShMessages' has not been declared
-   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
-      |                                                                                                                         ^~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:25:8: error: 'TShader_constructor_t' does not name a type; did you mean 'TShader_destructor_t'?
-   25 | static TShader_constructor_t glslang_TShader_constructor = nullptr;
-      |        ^~~~~~~~~~~~~~~~~~~~~
-      |        TShader_destructor_t
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc: In function 'bool loadGlslangLibraries()':
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:47:5: error: 'glslang_TShader_constructor' was not declared in this scope; did you mean 'glslang_TShader_destructor'?
-   47 |     glslang_TShader_constructor = (TShader_constructor_t)GetProcAddress(glslang_dll, "TShader_constructor");
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-      |     glslang_TShader_destructor
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:47:36: error: 'TShader_constructor_t' was not declared in this scope; did you mean 'TShader_destructor_t'?
-   47 |     glslang_TShader_constructor = (TShader_constructor_t)GetProcAddress(glslang_dll, "TShader_constructor");
-      |                                    ^~~~~~~~~~~~~~~~~~~~~
-      |                                    TShader_destructor_t
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:18:67: error: 'TBuiltInResource' in namespace 'glslang' does not name a type
+   18 | using TShader_parse_t = int (*)(glslang::TShader*, const glslang::TBuiltInResource*, int, EProfile, bool, bool, EShMessages, glslang::TShader::Includer&);
+      |                                                                   ^~~~~~~~~~~~~~~~
 [3/4] Building CXX object CMakeFiles/ncnn_binding.dir/src/hardware_wrap.cc.obj
 ninja: build stopped: subcommand failed.
 info REP Build has been failed, trying to do a full rebuild.
@@ -354,7 +330,7 @@ Not searching for unused variables given on the command line.
 -- Found OpenMP_C: -fopenmp (found version "4.5")
 -- Found OpenMP_CXX: -fopenmp (found version "4.5")
 -- Found OpenMP: TRUE (found version "4.5")
--- Configuring done (7.6s)
+-- Configuring done (6.3s)
 -- Generating done (0.1s)
 -- Build files have been written to: C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/build
 info CMD BUILD
@@ -368,38 +344,9 @@ info RUN ]
 [1/4] Building CXX object CMakeFiles/ncnn_binding.dir/src/binding.cc.obj
 FAILED: [code=1] CMakeFiles/ncnn_binding.dir/src/binding.cc.obj
 C:\msys64\mingw64\bin\g++.exe -DNAPI_DISABLE_CPP_EXCEPTIONS -DNOMINMAX -Dncnn_binding_EXPORTS -IC:/Users/Zenthrose/.cmake-js/node-x64/v25.2.1/include/node -IC:/opencode-1.0.134/packages/opencode/src/ncnn-binding///"C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/node-addon-api/" -IC:/opencode-1.0.134/packages/opencode/src/ncnn-binding/node_modules/node-addon-api -IC:/opencode-1.0.134/ncnn-vulkan/src -IC:/opencode-1.0.134/ncnn-vulkan/build/src -IC:/VulkanSDK/1.3.296.0/Include -IC:/VulkanSDK/1.3.296.0/Include/glslang -IC:/VulkanSDK/1.3.296.0/Include/SPIRV -O3 -DNDEBUG -fopenmp -MD -MT CMakeFiles/ncnn_binding.dir/src/binding.cc.obj -MF CMakeFiles\ncnn_binding.dir\src\binding.cc.obj.d -o CMakeFiles/ncnn_binding.dir/src/binding.cc.obj -c C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:12:29: error: typedef 'TShader_constructor_t' is initialized (use 'decltype' instead)
-   12 | typedef glslang::TShader* (*TShader_constructor_t)(glslang::EShLanguage);
-      |                             ^~~~~~~~~~~~~~~~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:12:61: error: 'EShLanguage' is not a member of 'glslang'; did you mean 'EShLanguage'?
-   12 | typedef glslang::TShader* (*TShader_constructor_t)(glslang::EShLanguage);
-      |                                                             ^~~~~~~~~~~
-In file included from C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:4:
-C:/VulkanSDK/1.3.296.0/Include/glslang/Public/ShaderLang.h:101:3: note: 'EShLanguage' declared here
-  101 | } EShLanguage;         // would be better as stage, but this is ancient now
-      |   ^~~~~~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:66: error: 'TBuiltInResource' in namespace 'glslang' does not name a type
-   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
-      |                                                                  ^~~~~~~~~~~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:90: error: 'glslang::EProfile' has not been declared
-   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
-      |                                                                                          ^~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:17:121: error: 'glslang::EShMessages' has not been declared
-   17 | typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
-      |                                                                                                                         ^~~~~~~
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:25:8: error: 'TShader_constructor_t' does not name a type; did you mean 'TShader_destructor_t'?
-   25 | static TShader_constructor_t glslang_TShader_constructor = nullptr;
-      |        ^~~~~~~~~~~~~~~~~~~~~
-      |        TShader_destructor_t
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc: In function 'bool loadGlslangLibraries()':
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:47:5: error: 'glslang_TShader_constructor' was not declared in this scope; did you mean 'glslang_TShader_destructor'?
-   47 |     glslang_TShader_constructor = (TShader_constructor_t)GetProcAddress(glslang_dll, "TShader_constructor");
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-      |     glslang_TShader_destructor
-C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:47:36: error: 'TShader_constructor_t' was not declared in this scope; did you mean 'TShader_destructor_t'?
-   47 |     glslang_TShader_constructor = (TShader_constructor_t)GetProcAddress(glslang_dll, "TShader_constructor");
-      |                                    ^~~~~~~~~~~~~~~~~~~~~
-      |                                    TShader_destructor_t
+C:/opencode-1.0.134/packages/opencode/src/ncnn-binding/src/binding.cc:18:67: error: 'TBuiltInResource' in namespace 'glslang' does not name a type
+   18 | using TShader_parse_t = int (*)(glslang::TShader*, const glslang::TBuiltInResource*, int, EProfile, bool, bool, EShMessages, glslang::TShader::Includer&);
+      |                                                                   ^~~~~~~~~~~~~~~~
 [3/4] Building CXX object CMakeFiles/ncnn_binding.dir/src/hardware_wrap.cc.obj
 ninja: build stopped: subcommand failed.
 ERR! OMG Process terminated: 1

@@ -17,7 +17,7 @@ struct GenerationConfig {
     float top_p = 1.0f;
     int top_k = 0;
     bool do_sample = true;
-    int repetition_penalty = 1.0f;
+    float repetition_penalty = 1.0f;
     std::vector<int> stop_tokens;
 };
 

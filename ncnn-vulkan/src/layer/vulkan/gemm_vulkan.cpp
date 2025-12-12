@@ -286,7 +286,7 @@ int Gemm_vulkan::forward(const std::vector<VkMat>& bottom_blobs, std::vector<VkM
         }
     }
 
-    int elempack = A.elempack;
+    (void)A.elempack;  // Reserved for future use
     size_t elemsize = A.elemsize;
 
     VkMat& top_blob = top_blobs[0];

@@ -236,7 +236,7 @@ static std::string search_file(const std::string& dirpath, const std::string& ne
         return dirpath + "\\" + needle;
 
     // recurse into subdirs
-    for (int i = 0; i < subdirs.size(); ++i)
+    for (size_t i = 0; i < subdirs.size(); ++i)
     {
         std::string found_path = search_file(dirpath + "\\" + subdirs[i], needle);
         if (!found_path.empty())
@@ -253,18 +253,18 @@ static int load_vulkan_windows(const char* driver_path)
     HMODULE libvulkan = LoadLibraryA(libpath);
     if (!libvulkan)
     {
-        NCNN_LOGE("LoadLibraryA %s failed %d", libpath, GetLastError());
+        NCNN_LOGE("LoadLibraryA %s failed %lu", libpath, (unsigned long)GetLastError());
         return -1;
     }
 
     PFN_vkGetInstanceProcAddr GetInstanceProcAddr = 0;
 
-    GetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)GetProcAddress(libvulkan, "vk_icdGetInstanceProcAddr");
+    GetInstanceProcAddr = reinterpret_cast<PFN_vkGetInstanceProcAddr>(reinterpret_cast<void*>(GetProcAddress(libvulkan, "vk_icdGetInstanceProcAddr")));
     if (GetInstanceProcAddr)
     {
         // load icd driver
         typedef VkResult(VKAPI_PTR * PFN_icdNegotiateLoaderICDInterfaceVersion)(uint32_t * pSupportedVersion);
-        PFN_icdNegotiateLoaderICDInterfaceVersion icdNegotiateLoaderICDInterfaceVersion = (PFN_icdNegotiateLoaderICDInterfaceVersion)GetProcAddress(libvulkan, "vk_icdNegotiateLoaderICDInterfaceVersion");
+        PFN_icdNegotiateLoaderICDInterfaceVersion icdNegotiateLoaderICDInterfaceVersion = reinterpret_cast<PFN_icdNegotiateLoaderICDInterfaceVersion>(reinterpret_cast<void*>(GetProcAddress(libvulkan, "vk_icdNegotiateLoaderICDInterfaceVersion")));
         if (icdNegotiateLoaderICDInterfaceVersion)
         {
             uint32_t supported_version = 5;
@@ -279,10 +279,10 @@ static int load_vulkan_windows(const char* driver_path)
     }
     else
     {
-        GetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)GetProcAddress(libvulkan, "vkGetInstanceProcAddr");
+        GetInstanceProcAddr = reinterpret_cast<PFN_vkGetInstanceProcAddr>(reinterpret_cast<void*>(GetProcAddress(libvulkan, "vkGetInstanceProcAddr")));
         if (!GetInstanceProcAddr)
         {
-            NCNN_LOGE("GetProcAddress failed %d", GetLastError());
+            NCNN_LOGE("GetProcAddress failed %lu", (unsigned long)GetLastError());
             FreeLibrary(libvulkan);
             return -1;
         }

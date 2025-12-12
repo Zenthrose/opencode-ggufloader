@@ -12,7 +12,7 @@ class InnerProduct {
 public:
     Mat weight_data;
     Mat bias_data;
-    int forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const {
+    int forward(const Mat& bottom_blob, Mat& top_blob, const Option& /* opt */) const {
         int w = bottom_blob.w;
         int h = bottom_blob.h;
         int channels = weight_data.h;
@@ -31,13 +31,39 @@ public:
     }
 };
 
+// Rotary Position Embedding (RoPE) module
+class RoPEModule {
+public:
+    int forward(const Mat& bottom_blob, Mat& top_blob, int pos_base, const Option& /* opt */) const {
+        int seq_len = bottom_blob.h;
+        int dim = bottom_blob.w;
+        int half = dim / 2;
+        top_blob.create(dim, seq_len);
+        
+        for (int i = 0; i < seq_len; i++) {
+            const float* src = bottom_blob.row(i);
+            float* dst = top_blob.row(i);
+            int pos = pos_base + i;
+            
+            for (int j = 0; j < half; j++) {
+                float theta = powf(10000.0f, -2.0f * j / (float)dim);
+                float cos_t = cosf(pos * theta);
+                float sin_t = sinf(pos * theta);
+                dst[2*j] = src[2*j] * cos_t - src[2*j+1] * sin_t;
+                dst[2*j+1] = src[2*j] * sin_t + src[2*j+1] * cos_t;
+            }
+        }
+        return 0;
+    }
+};
+
 class LayerNorm {
 public:
     bool affine = false;
     Mat weight_data;
     Mat bias_data;
     float eps = 1e-5f;
-    int forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const {
+    int forward(const Mat& bottom_blob, Mat& top_blob, const Option& /* opt */) const {
         int w = bottom_blob.w;
         int h = bottom_blob.h;
         top_blob.create(w, h);
@@ -224,26 +250,48 @@ Mat LLMEngine::forward_phi3(const std::vector<int>& tokens)
     Option opt;
     opt.use_vulkan_compute = true;
 
+    // Determine embedding prefix
+    std::string embed_prefix = architecture == "phi3" ? "phi3.embed_tokens" :
+                              architecture == "llama" ? "model.embed_tokens" :
+                              architecture == "gpt2" ? "transformer.wte" :
+                              architecture == "mistral" ? "model.embed_tokens" :
+                              architecture == "qwen2" ? "model.embed_tokens" :
+                              "phi3.embed_tokens";
+
     Mat x(hidden_size, tokens.size());
     for (size_t i = 0; i < tokens.size(); i++) {
-        memcpy(x.row(i), weights["phi3.embed_tokens"].row(tokens[i]), hidden_size * sizeof(float));
+        memcpy(x.row(i), weights[embed_prefix].row(tokens[i]), hidden_size * sizeof(float));
     }
 
     for (int l = 0; l < n_layers; l++) {
         x = forward_layer(l, x, 0);
     }
 
+    // Final layer norm
     LayerNorm final_norm;
     final_norm.affine = true;
     final_norm.eps = 1e-5f;
-    final_norm.weight_data = weights["phi3.norm.weight"];
-    final_norm.bias_data = weights["phi3.norm.bias"];
+    std::string final_norm_prefix = architecture == "phi3" ? "phi3.norm" :
+                                   architecture == "llama" ? "model.norm" :
+                                   architecture == "gpt2" ? "transformer.ln_f" :
+                                   architecture == "mistral" ? "model.norm" :
+                                   architecture == "qwen2" ? "model.norm" :
+                                   "phi3.norm";
+    final_norm.weight_data = weights[final_norm_prefix + ".weight"];
+    auto final_bias_it = weights.find(final_norm_prefix + ".bias");
+    if (final_bias_it != weights.end()) {
+        final_norm.bias_data = final_bias_it->second;
+    }
     Mat norm_x;
     final_norm.forward(x, norm_x, opt);
 
+    // Language model head
     InnerProduct lm_head;
     lm_head.weight_data = weights["lm_head.weight"];
-    lm_head.bias_data = weights["lm_head.bias"];
+    final_bias_it = weights.find("lm_head.bias");
+    if (final_bias_it != weights.end()) {
+        lm_head.bias_data = final_bias_it->second;
+    }
     Mat logits(vocab_size, tokens.size());
     lm_head.forward(norm_x, logits, opt);
 
@@ -255,25 +303,167 @@ Mat LLMEngine::forward_layer(int layer_idx, const Mat& x, int start_pos)
     Option opt;
     opt.use_vulkan_compute = true;
 
-    std::string prefix = architecture == "phi3" ? "phi3.layers." + std::to_string(layer_idx) :
-                        architecture == "llama" ? "model.layers." + std::to_string(layer_idx) :
-                        "transformer.h." + std::to_string(layer_idx);
+    // Determine weight prefix based on architecture
+    std::string prefix;
+    std::string attn_prefix;
+    if (architecture == "phi3") {
+        prefix = "phi3.layers." + std::to_string(layer_idx);
+        attn_prefix = prefix + ".self_attn";
+    } else if (architecture == "llama") {
+        prefix = "model.layers." + std::to_string(layer_idx);
+        attn_prefix = prefix + ".self_attn";
+    } else if (architecture == "gpt2") {
+        prefix = "transformer.h." + std::to_string(layer_idx);
+        attn_prefix = prefix + ".attn";
+    } else if (architecture == "mistral") {
+        prefix = "model.layers." + std::to_string(layer_idx);
+        attn_prefix = prefix + ".self_attn";
+    } else if (architecture == "qwen2") {
+        prefix = "model.layers." + std::to_string(layer_idx);
+        attn_prefix = prefix + ".self_attn";
+    } else {
+        prefix = "phi3.layers." + std::to_string(layer_idx);
+        attn_prefix = prefix + ".self_attn";
+    }
 
+    // Input layer norm
     LayerNorm norm;
     norm.affine = true;
     norm.eps = 1e-5f;
     norm.weight_data = weights[prefix + ".input_layernorm.weight"];
-    norm.bias_data = weights[prefix + ".input_layernorm.bias"];
+    auto bias_it = weights.find(prefix + ".input_layernorm.bias");
+    if (bias_it != weights.end()) {
+        norm.bias_data = bias_it->second;
+    }
     Mat norm_out;
     norm.forward(x, norm_out, opt);
 
-    // Attention would go here - simplified for now
-    Mat attn_out = norm_out; // Placeholder
+    // Attention mechanism
+    // Project Q, K, V
+    InnerProduct ip_q;
+    ip_q.weight_data = weights[attn_prefix + ".q_proj.weight"];
+    bias_it = weights.find(attn_prefix + ".q_proj.bias");
+    if (bias_it != weights.end()) {
+        ip_q.bias_data = bias_it->second;
+    }
+    Mat q;
+    ip_q.forward(norm_out, q, opt);
 
-    // Residual
+    InnerProduct ip_k;
+    ip_k.weight_data = weights[attn_prefix + ".k_proj.weight"];
+    bias_it = weights.find(attn_prefix + ".k_proj.bias");
+    if (bias_it != weights.end()) {
+        ip_k.bias_data = bias_it->second;
+    }
+    Mat k;
+    ip_k.forward(norm_out, k, opt);
+
+    InnerProduct ip_v;
+    ip_v.weight_data = weights[attn_prefix + ".v_proj.weight"];
+    bias_it = weights.find(attn_prefix + ".v_proj.bias");
+    if (bias_it != weights.end()) {
+        ip_v.bias_data = bias_it->second;
+    }
+    Mat v;
+    ip_v.forward(norm_out, v, opt);
+
+    // Multi-head attention with GQA support
+    // For GQA: multiple query heads share the same key/value head
+    int head_dim = hidden_size / n_head;
+    int seq_len = x.h;
+    Mat attn_out(hidden_size, seq_len);
+    int num_heads_per_kv = n_head / n_kv_head;
+    
+    RoPEModule rope;
+    
+    for (int h = 0; h < n_head; h++) {
+        int kv_head_idx = h / num_heads_per_kv;  // Which KV head to use for this query head
+        int offset = h * head_dim;
+        int kv_offset = kv_head_idx * head_dim;  // KV heads use same dimension per head
+        
+        // Extract query head
+        Mat q_h(head_dim, seq_len);
+        for (int s = 0; s < seq_len; s++) {
+            memcpy(q_h.row(s), q.row(s) + offset, head_dim * sizeof(float));
+        }
+        
+        // Extract key/value head (shared across multiple query heads in GQA)
+        Mat k_h(head_dim, seq_len);
+        Mat v_h(head_dim, seq_len);
+        for (int s = 0; s < seq_len; s++) {
+            memcpy(k_h.row(s), k.row(s) + kv_offset, head_dim * sizeof(float));
+            memcpy(v_h.row(s), v.row(s) + kv_offset, head_dim * sizeof(float));
+        }
+
+        // Apply RoPE
+        Mat q_rot, k_rot;
+        rope.forward(q_h, q_rot, start_pos, opt);
+        rope.forward(k_h, k_rot, start_pos, opt);
+
+        // Compute attention scores: Q @ K^T / sqrt(head_dim)
+        Mat scores(seq_len, seq_len);
+        for (int i = 0; i < seq_len; i++) {
+            for (int j = 0; j < seq_len; j++) {
+                float dot = 0;
+                for (int d = 0; d < head_dim; d++) {
+                    dot += q_rot.row(i)[d] * k_rot.row(j)[d];
+                }
+                scores.row(i)[j] = dot / sqrtf((float)head_dim);
+            }
+        }
+
+        // Apply causal mask (for autoregressive generation)
+        for (int i = 0; i < seq_len; i++) {
+            for (int j = i + 1; j < seq_len; j++) {
+                scores.row(i)[j] = -1e9f;
+            }
+        }
+
+        // Softmax
+        for (int i = 0; i < seq_len; i++) {
+            float max_val = *std::max_element(scores.row(i), scores.row(i) + seq_len);
+            float sum = 0;
+            for (int j = 0; j < seq_len; j++) {
+                scores.row(i)[j] = expf(scores.row(i)[j] - max_val);
+                sum += scores.row(i)[j];
+            }
+            for (int j = 0; j < seq_len; j++) {
+                scores.row(i)[j] /= sum;
+            }
+        }
+
+        // Apply attention to values: scores @ V
+        Mat out_h(head_dim, seq_len);
+        for (int i = 0; i < seq_len; i++) {
+            for (int d = 0; d < head_dim; d++) {
+                float val = 0;
+                for (int j = 0; j < seq_len; j++) {
+                    val += scores.row(i)[j] * v_h.row(j)[d];
+                }
+                out_h.row(i)[d] = val;
+            }
+        }
+
+        // Concatenate heads
+        for (int s = 0; s < seq_len; s++) {
+            memcpy(attn_out.row(s) + offset, out_h.row(s), head_dim * sizeof(float));
+        }
+    }
+
+    // Output projection
+    InnerProduct ip_o;
+    ip_o.weight_data = weights[attn_prefix + ".o_proj.weight"];
+    bias_it = weights.find(attn_prefix + ".o_proj.bias");
+    if (bias_it != weights.end()) {
+        ip_o.bias_data = bias_it->second;
+    }
+    Mat attn_proj;
+    ip_o.forward(attn_out, attn_proj, opt);
+
+    // Residual connection
     Mat res(x.w, x.h);
-    for (int i = 0; i < x.total(); i++) {
-        res[i] = x[i] + attn_out[i];
+    for (size_t i = 0; i < x.total(); i++) {
+        res[i] = x[i] + attn_proj[i];
     }
 
     // MLP
@@ -281,36 +471,51 @@ Mat LLMEngine::forward_layer(int layer_idx, const Mat& x, int start_pos)
     post_norm.affine = true;
     post_norm.eps = 1e-5f;
     post_norm.weight_data = weights[prefix + ".post_attention_layernorm.weight"];
-    post_norm.bias_data = weights[prefix + ".post_attention_layernorm.bias"];
+    bias_it = weights.find(prefix + ".post_attention_layernorm.bias");
+    if (bias_it != weights.end()) {
+        post_norm.bias_data = bias_it->second;
+    }
     Mat post_norm_out;
     post_norm.forward(res, post_norm_out, opt);
 
-    // Simplified MLP
+    // MLP with SiLU activation
     InnerProduct gate;
     gate.weight_data = weights[prefix + ".mlp.gate_proj.weight"];
-    gate.bias_data = weights[prefix + ".mlp.gate_proj.bias"];
+    bias_it = weights.find(prefix + ".mlp.gate_proj.bias");
+    if (bias_it != weights.end()) {
+        gate.bias_data = bias_it->second;
+    }
     Mat gate_out;
     gate.forward(post_norm_out, gate_out, opt);
 
     InnerProduct up;
     up.weight_data = weights[prefix + ".mlp.up_proj.weight"];
-    up.bias_data = weights[prefix + ".mlp.up_proj.bias"];
+    bias_it = weights.find(prefix + ".mlp.up_proj.bias");
+    if (bias_it != weights.end()) {
+        up.bias_data = bias_it->second;
+    }
     Mat up_out;
     up.forward(post_norm_out, up_out, opt);
 
+    // SiLU activation: x * sigmoid(x)
     Mat mlp_hidden(gate_out.w, gate_out.h);
-    for (int i = 0; i < gate_out.total(); i++) {
-        mlp_hidden[i] = gate_out[i] * (1 / (1 + expf(-gate_out[i]))) * up_out[i];
+    for (size_t i = 0; i < gate_out.total(); i++) {
+        float gate_val = gate_out[i];
+        float sigmoid_val = 1.0f / (1.0f + expf(-gate_val));
+        mlp_hidden[i] = gate_val * sigmoid_val * up_out[i];
     }
 
     InnerProduct down;
     down.weight_data = weights[prefix + ".mlp.down_proj.weight"];
-    down.bias_data = weights[prefix + ".mlp.down_proj.bias"];
+    bias_it = weights.find(prefix + ".mlp.down_proj.bias");
+    if (bias_it != weights.end()) {
+        down.bias_data = bias_it->second;
+    }
     Mat mlp_out;
     down.forward(mlp_hidden, mlp_out, opt);
 
     Mat final_out(res.w, res.h);
-    for (int i = 0; i < res.total(); i++) {
+    for (size_t i = 0; i < res.total(); i++) {
         final_out[i] = res[i] + mlp_out[i];
     }
 
@@ -319,13 +524,27 @@ Mat LLMEngine::forward_layer(int layer_idx, const Mat& x, int start_pos)
 
 int LLMEngine::sample_token(const float* logits, const GenerationConfig& config, const std::vector<int>& history)
 {
+    // Apply repetition penalty if configured
+    std::vector<float> adjusted_logits(vocab_size);
+    for (int i = 0; i < vocab_size; i++) {
+        adjusted_logits[i] = logits[i];
+    }
+    
+    if (config.repetition_penalty != 1.0f && !history.empty()) {
+        for (int token_id : history) {
+            if (token_id >= 0 && token_id < vocab_size) {
+                adjusted_logits[token_id] /= config.repetition_penalty;
+            }
+        }
+    }
+    
     if (!config.do_sample || config.temperature <= 0) {
         // Greedy sampling
         int max_id = 0;
-        float max_val = logits[0];
+        float max_val = adjusted_logits[0];
         for (int i = 1; i < vocab_size; i++) {
-            if (logits[i] > max_val) {
-                max_val = logits[i];
+            if (adjusted_logits[i] > max_val) {
+                max_val = adjusted_logits[i];
                 max_id = i;
             }
         }
@@ -334,10 +553,10 @@ int LLMEngine::sample_token(const float* logits, const GenerationConfig& config,
 
     // Apply temperature
     std::vector<float> probs(vocab_size);
-    float max_logit = *std::max_element(logits, logits + vocab_size);
+    float max_logit = *std::max_element(adjusted_logits.begin(), adjusted_logits.end());
     float sum = 0;
     for (int i = 0; i < vocab_size; i++) {
-        probs[i] = expf((logits[i] - max_logit) / config.temperature);
+        probs[i] = expf((adjusted_logits[i] - max_logit) / config.temperature);
         sum += probs[i];
     }
     for (int i = 0; i < vocab_size; i++) {

@@ -1286,7 +1286,7 @@ void GpuInfoPrivate::query_extension_properties()
 
         for (uint32_t j = 0; j < propertyCount; j++)
         {
-            const VkCooperativeMatrixFlexibleDimensionsPropertiesNV& cmfdp = queryCooperativeMatrixFlexibleDimensionsSubPropertiesNV[j];
+            (void)queryCooperativeMatrixFlexibleDimensionsSubPropertiesNV[j];  // Reserved for future use
             // NCNN_LOGE("cmfdp %2d %2d %2d  %d %d %d %d  %d %d %d", cmfdp.MGranularity, cmfdp.NGranularity, cmfdp.KGranularity, cmfdp.AType, cmfdp.BType, cmfdp.CType, cmfdp.ResultType, cmfdp.saturatingAccumulation, cmfdp.scope, cmfdp.workgroupInvocations);
         }
     }
@@ -1317,7 +1317,7 @@ void GpuInfoPrivate::query_extension_properties()
 
         for (uint32_t j = 0; j < propertyCount; j++)
         {
-            const VkCooperativeVectorPropertiesNV& cvp = queryCooperativeVectorSubPropertiesNV[j];
+            (void)queryCooperativeVectorSubPropertiesNV[j];  // Reserved for future use
             // NCNN_LOGE("cvp %d %d %d %d %d  %d", cvp.inputType, cvp.inputInterpretation, cvp.matrixInterpretation, cvp.biasInterpretation, cvp.resultType, cvp.transpose);
         }
     }
@@ -5410,7 +5410,7 @@ int compile_spirv_module(const char* comp_data, int comp_data_size, const Option
             {
                 if (support_shader_int64)
                 {
-                    sprintf(defstr, "%luull", def.u64);
+                    sprintf(defstr, "%lluull", def.u64);
                 }
                 else
                 {
@@ -5454,7 +5454,7 @@ int compile_spirv_module(const char* comp_data, int comp_data_size, const Option
             {
                 if (support_shader_int64)
                 {
-                    sprintf(defstr, "%luull", def.u64);
+                    sprintf(defstr, "%lluull", def.u64);
                 }
                 else
                 {

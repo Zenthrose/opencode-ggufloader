@@ -1,25 +1,30 @@
 #include <napi.h>
 #include <windows.h>
 #include <iostream>
+#include <string>
+#include <cstdlib>
 #include <glslang/Public/ShaderLang.h>
+#include <glslang/Include/ResourceLimits.h>
 #include <glslang/SPIRV/GlslangToSpv.h>
 #include "llm_engine_wrap.h"
 #include "hardware_wrap.h"
+
 static HMODULE glslang_dll = NULL;
 static HMODULE spirv_dll = NULL;
-typedef void (*InitializeProcess_t)();
-typedef void (*FinalizeProcess_t)();
-typedef glslang::TShader* (*TShader_constructor_t)(glslang::EShLanguage);
-typedef void (*TShader_destructor_t)(glslang::TShader*);
-typedef void (*TShader_setStringsWithLengths_t)(glslang::TShader*, const char* const*, const int*, int);
-typedef void (*TShader_setEntryPoint_t)(glslang::TShader*, const char*);
-typedef void (*TShader_setSourceEntryPoint_t)(glslang::TShader*, const char*);
-typedef int (*TShader_parse_t)(glslang::TShader*, const glslang::TBuiltInResource*, int, glslang::EProfile, bool, bool, glslang::EShMessages, glslang::TShader::Includer&);
-typedef const char* (*TShader_getInfoLog_t)(glslang::TShader*);
-typedef const char* (*TShader_getInfoDebugLog_t)(glslang::TShader*);
-typedef void (*GlslangToSpv_t)(const glslang::TIntermediate*, std::vector<unsigned int>&, glslang::SpvOptions*);
-typedef glslang::TProgram* (*TProgram_constructor_t)();
-typedef void (*TProgram_destructor_t)(glslang::TProgram*);
+using InitializeProcess_t = void (*)();
+using FinalizeProcess_t = void (*)();
+using TShader_constructor_t = glslang::TShader* (*)(EShLanguage);
+using TShader_destructor_t = void (*)(glslang::TShader*);
+using TShader_setStringsWithLengths_t = void (*)(glslang::TShader*, const char* const*, const int*, int);
+using TShader_setEntryPoint_t = void (*)(glslang::TShader*, const char*);
+using TShader_setSourceEntryPoint_t = void (*)(glslang::TShader*, const char*);
+// TBuiltInResource is a typedef defined in ResourceLimits.h, not in glslang namespace
+using TShader_parse_t = int (*)(glslang::TShader*, const TBuiltInResource*, int, EProfile, bool, bool, EShMessages, glslang::TShader::Includer&);
+using TShader_getInfoLog_t = const char* (*)(glslang::TShader*);
+using TShader_getInfoDebugLog_t = const char* (*)(glslang::TShader*);
+using GlslangToSpv_t = void (*)(const glslang::TIntermediate*, std::vector<unsigned int>&, glslang::SpvOptions*);
+using TProgram_constructor_t = glslang::TProgram* (*)();
+using TProgram_destructor_t = void (*)(glslang::TProgram*);
 static InitializeProcess_t glslang_InitializeProcess = nullptr;
 static FinalizeProcess_t glslang_FinalizeProcess = nullptr;
 static TShader_constructor_t glslang_TShader_constructor = nullptr;
@@ -34,8 +39,17 @@ static GlslangToSpv_t glslang_GlslangToSpv = nullptr;
 static TProgram_constructor_t glslang_TProgram_constructor = nullptr;
 static TProgram_destructor_t glslang_TProgram_destructor = nullptr;
 bool loadGlslangLibraries() {
-    glslang_dll = LoadLibraryA("C:\\VulkanSDK\\1.3.296.0\\Bin\\glslang.dll");
-    spirv_dll = LoadLibraryA("C:\\VulkanSDK\\1.3.296.0\\Bin\\SPIRV.dll");
+    // Get Vulkan SDK path from environment variable
+    const char* vulkan_sdk = getenv("VULKAN_SDK");
+    if (!vulkan_sdk) {
+        vulkan_sdk = "C:\\VulkanSDK\\1.3.296.0";  // Fallback to default location
+    }
+    
+    std::string glslang_path = std::string(vulkan_sdk) + "\\Bin\\glslang.dll";
+    std::string spirv_path = std::string(vulkan_sdk) + "\\Bin\\SPIRV.dll";
+    
+    glslang_dll = LoadLibraryA(glslang_path.c_str());
+    spirv_dll = LoadLibraryA(spirv_path.c_str());
     
     if (!glslang_dll || !spirv_dll) {
         std::cerr << "Failed to load glslang DLLs" << std::endl;

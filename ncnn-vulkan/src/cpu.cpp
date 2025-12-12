@@ -989,7 +989,7 @@ static int get_physical_cpucount()
     int count = 0;
 #if defined _WIN32
     typedef BOOL(WINAPI * LPFN_GLPI)(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, PDWORD);
-    LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+    LPFN_GLPI glpi = reinterpret_cast<LPFN_GLPI>(reinterpret_cast<void*>(GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation")));
     if (glpi == NULL)
     {
         NCNN_LOGE("GetLogicalProcessorInformation is not supported");
@@ -1232,7 +1232,7 @@ static int get_cpu_level2_cachesize()
     int size = 0;
 #if defined _WIN32
     typedef BOOL(WINAPI * LPFN_GLPI)(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, PDWORD);
-    LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+    LPFN_GLPI glpi = reinterpret_cast<LPFN_GLPI>(reinterpret_cast<void*>(GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation")));
     if (glpi != NULL)
     {
         DWORD return_length = 0;
@@ -1302,7 +1302,7 @@ static int get_cpu_level3_cachesize()
     int size = 0;
 #if defined _WIN32
     typedef BOOL(WINAPI * LPFN_GLPI)(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, PDWORD);
-    LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+    LPFN_GLPI glpi = reinterpret_cast<LPFN_GLPI>(reinterpret_cast<void*>(GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation")));
     if (glpi != NULL)
     {
         DWORD return_length = 0;
@@ -1353,7 +1353,7 @@ static ncnn::CpuSet get_smt_cpu_mask()
     ncnn::CpuSet smt_cpu_mask;
 
     typedef BOOL(WINAPI * LPFN_GLPI)(PSYSTEM_LOGICAL_PROCESSOR_INFORMATION, PDWORD);
-    LPFN_GLPI glpi = (LPFN_GLPI)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation");
+    LPFN_GLPI glpi = reinterpret_cast<LPFN_GLPI>(reinterpret_cast<void*>(GetProcAddress(GetModuleHandle(TEXT("kernel32")), "GetLogicalProcessorInformation")));
     if (glpi == NULL)
     {
         NCNN_LOGE("GetLogicalProcessorInformation is not supported");
@@ -1405,7 +1405,7 @@ static std::vector<int> get_max_freq_mhz()
     HMODULE powrprof = LoadLibrary(TEXT("powrprof.dll"));
 
     typedef LONG(WINAPI * LPFN_CNPI)(POWER_INFORMATION_LEVEL, PVOID, ULONG, PVOID, ULONG);
-    LPFN_CNPI cnpi = (LPFN_CNPI)GetProcAddress(powrprof, "CallNtPowerInformation");
+    LPFN_CNPI cnpi = reinterpret_cast<LPFN_CNPI>(reinterpret_cast<void*>(GetProcAddress(powrprof, "CallNtPowerInformation")));
     if (cnpi == NULL)
     {
         NCNN_LOGE("CallNtPowerInformation is not supported");
@@ -1435,7 +1435,7 @@ static int set_sched_affinity(const ncnn::CpuSet& thread_affinity_mask)
     DWORD_PTR prev_mask = SetThreadAffinityMask(GetCurrentThread(), thread_affinity_mask.mask);
     if (prev_mask == 0)
     {
-        NCNN_LOGE("SetThreadAffinityMask failed %d", GetLastError());
+        NCNN_LOGE("SetThreadAffinityMask failed %lu", (unsigned long)GetLastError());
         return -1;
     }
 
@@ -1628,7 +1628,7 @@ static void initialize_cpu_thread_affinity_mask(ncnn::CpuSet& mask_all, ncnn::Cp
     }
 
     typedef BOOL(WINAPI * LPFN_GLPIE)(LOGICAL_PROCESSOR_RELATIONSHIP, PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX, PDWORD);
-    LPFN_GLPIE glpie = (LPFN_GLPIE)GetProcAddress(kernel32, "GetLogicalProcessorInformationEx");
+    LPFN_GLPIE glpie = reinterpret_cast<LPFN_GLPIE>(reinterpret_cast<void*>(GetProcAddress(kernel32, "GetLogicalProcessorInformationEx")));
 
     if (glpie != NULL)
     {
@@ -1690,10 +1690,10 @@ static void initialize_cpu_thread_affinity_mask(ncnn::CpuSet& mask_all, ncnn::Cp
             for (int i = 0; i < g_cpucount; i++)
             {
                 bool isECore = false;
-                for (int j = 0; j < processorCoreType.size(); j++)
+                for (size_t j = 0; j < processorCoreType.size(); j++)
                 {
                     std::pair<DWORD, bool> p = processorCoreType[j];
-                    if (p.first == i)
+                    if (p.first == static_cast<DWORD>(i))
                     {
                         isECore = p.second;
                         break;
